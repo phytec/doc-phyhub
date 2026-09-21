@@ -10,7 +10,7 @@ Getting the Source Code
 
 Clone the Git repository::
 
-   git clone git@github.com:phytec/doc-phyhub.git
+   git clone https://github.com/phytec/doc-phyhub.git
 
 Change your current working directory to the just cloned source code::
 
