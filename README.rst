@@ -1,10 +1,6 @@
 PHYTEC phyHUB Documentation
 ===========================
 
-We welcome contributions to this documentation! Before making any changes,
-please read the `Contribution Guide
-<https://github.com/phytec/doc-phyhub/blob/main/CONTRIBUTING.rst>`_.
-
 Getting the Source Code
 -----------------------
 
