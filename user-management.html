@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management &mdash; PHYTEC phyHUB Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e72c8e07" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/phytec-theme.css?v=6bd448f6" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://phytec.github.io/doc-phyhub/user-management.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Device Provisioning" href="provisioning.html" />
+    <link rel="prev" title="Getting Started with phyHUB" href="getting-started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHYTEC phyHUB Documentation
+              <img src="_static/logo-phytec.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started with phyHUB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-it-works-a-quick-overview">How It Works – A Quick Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-a-setting-up-your-organization">Part A: Setting Up Your Organization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-open-the-registration-link-and-fill-in-your-details">Step 1: Open the Registration Link and Fill In Your Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-verify-your-email-address">Step 2: Verify Your Email Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-set-your-password">Step 3: Set Your Password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-log-in-to-the-organization-dashboard">Step 4: Log In to the Organization Dashboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-b-understanding-the-dashboard-tabs">Part B: Understanding the Dashboard Tabs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#members-tab">Members Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invitations-tab">Invitations Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#roles-tab">Roles Tab</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-c-inviting-your-team">Part C: Inviting Your Team</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-send-an-invitation">How to Send an Invitation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-the-right-role">Choosing the Right Role</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-d-what-your-invited-colleague-will-experience">Part D: What Your Invited Colleague Will Experience</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-accept-the-invitation">Step 1: Accept the Invitation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-set-up-their-password">Step 2: Set Up Their Password</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-e-managing-users-over-time">Part E: Managing Users Over Time</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reassigning-or-adding-roles-to-an-existing-member">Reassigning or Adding Roles to an Existing Member</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocking-a-member">Blocking a Member</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-a-member">Removing a Member</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-verification-email-never-arrived">The verification email never arrived</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-colleague-s-invitation-link-has-expired">A colleague’s invitation link has expired</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-colleague-says-they-cannot-log-in-after-accepting-the-invite">A colleague says they cannot log in after accepting the invite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-colleague-says-they-can-log-in-but-cannot-access-certain-features">A colleague says they can log in but cannot access certain features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="provisioning.html">Device Provisioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">UI Manual: Devices, Software &amp; Assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">phyHUB CLI Manual: Devices &amp; Software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHYTEC phyHUB Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Management</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/phytec/doc-phyhub/blob/main/source/user-management.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-management">
+<h1>User Management<a class="headerlink" href="#user-management" title="Link to this heading"></a></h1>
+<p>This guide walks you through everything you need to know to set up and manage
+your team’s access to phyHUB. It covers creating your organization, inviting
+colleagues, assigning the right roles, and keeping access up to date over time.</p>
+<section id="how-it-works-a-quick-overview">
+<h2>How It Works – A Quick Overview<a class="headerlink" href="#how-it-works-a-quick-overview" title="Link to this heading"></a></h2>
+<p>phyHUB uses organizations to keep each company’s users and data completely
+separate. Every organization has an <strong>Organization Admin</strong> – the first person
+to register – who is responsible for managing all team members within that
+organization.</p>
+<p>A few important things to know upfront:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Users cannot sign up on their own.</strong> The only way to join a phyHUB
+organization is to be invited by the Organization Admin. This is by design,
+to keep your workspace secure.</p>
+</div>
+<p>The overall flow looks like this:</p>
+<ol class="arabic simple">
+<li><p>Admin registers organization</p></li>
+<li><p>Admin verifies email &amp; logs in</p></li>
+<li><p>Admin invites colleagues (one by one, with a role)</p></li>
+<li><p>Colleagues receive an email</p>
+<ol class="arabic simple">
+<li><p>Accept invite</p></li>
+<li><p>Set a password</p></li>
+<li><p>Access phyHUB</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="part-a-setting-up-your-organization">
+<h2>Part A: Setting Up Your Organization<a class="headerlink" href="#part-a-setting-up-your-organization" title="Link to this heading"></a></h2>
+<p>This section is for the person who has been designated as the Organization
+Admin and has received a registration link from the phyHUB team.</p>
+<section id="step-1-open-the-registration-link-and-fill-in-your-details">
+<h3>Step 1: Open the Registration Link and Fill In Your Details<a class="headerlink" href="#step-1-open-the-registration-link-and-fill-in-your-details" title="Link to this heading"></a></h3>
+<p>Click the registration link you received. You will land on the <strong>Register
+Organization</strong> page.</p>
+<figure class="align-default">
+<img alt="_images/register-organization.png" src="_images/register-organization.png" />
+</figure>
+<p>Fill in all four fields:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>What to enter</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Admin Email</p></td>
+<td><p>Your work email address. This becomes your login.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Admin Full Name</p></td>
+<td><p>Your first and last name.</p></td>
+</tr>
+<tr class="row-even"><td><p>Organization Name</p></td>
+<td><p>A short, URL-friendly identifier for your company
+(lowercase letters, numbers, and hyphens only;
+1–50 characters; must start with a letter). Example:
+<code class="docutils literal notranslate"><span class="pre">my-company</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Display Name</p></td>
+<td><p>The human-readable name of your company.
+Example: <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Company</span> <span class="pre">Inc.</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-default">
+<img alt="_images/register-organization-filled.png" src="_images/register-organization-filled.png" />
+</figure>
+<p>Once everything looks good, click <strong>+ Create Organization</strong>.</p>
+</section>
+<section id="step-2-verify-your-email-address">
+<h3>Step 2: Verify Your Email Address<a class="headerlink" href="#step-2-verify-your-email-address" title="Link to this heading"></a></h3>
+<p>After submitting the form, phyHUB will send a verification email to the address
+you entered.</p>
+<figure class="align-default">
+<img alt="_images/verify-account.png" src="_images/verify-account.png" />
+</figure>
+<p>Open the email and click <strong>Verify Your Account</strong>. This confirms that your email
+address is valid and activates your account.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you don’t see the email within a few minutes, check your spam or junk
+folder. If it still hasn’t arrived, see the Troubleshooting section at the
+end of this guide.</p>
+</div>
+</section>
+<section id="step-3-set-your-password">
+<span id="step-set-your-password"></span><h3>Step 3: Set Your Password<a class="headerlink" href="#step-3-set-your-password" title="Link to this heading"></a></h3>
+<p>After verifying your email, you will be prompted to set a password for your
+account.</p>
+<figure class="align-default">
+<img alt="_images/set-password.png" src="_images/set-password.png" />
+</figure>
+<p>Your password must meet the following requirements:</p>
+<ul class="simple">
+<li><p>At least 8 characters</p></li>
+<li><p>At least one uppercase letter (A–Z)</p></li>
+<li><p>At least one lowercase letter (a–z)</p></li>
+<li><p>At least one number (0–9)</p></li>
+</ul>
+<p>A strength indicator will help you gauge how secure your password is. Enter it
+twice to confirm, then click <strong>Set Password &amp; Continue</strong>.</p>
+</section>
+<section id="step-4-log-in-to-the-organization-dashboard">
+<h3>Step 4: Log In to the Organization Dashboard<a class="headerlink" href="#step-4-log-in-to-the-organization-dashboard" title="Link to this heading"></a></h3>
+<p>You are now logged in for the first time. Welcome to the <strong>Organization
+Dashboard</strong> – this is your control center for managing your team.</p>
+<figure class="align-default">
+<img alt="_images/organization-dashboard-first-login.png" src="_images/organization-dashboard-first-login.png" />
+</figure>
+<p>At the top, you will see four summary cards:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Card</p></th>
+<th class="head"><p>What it shows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Active</p></td>
+<td><p>The number of currently active members</p></td>
+</tr>
+<tr class="row-odd"><td><p>Blocked</p></td>
+<td><p>Members who have been temporarily blocked from accessing
+phyHUB</p></td>
+</tr>
+<tr class="row-even"><td><p>Pending Invites</p></td>
+<td><p>Invitations that have been sent but not yet accepted</p></td>
+</tr>
+<tr class="row-odd"><td><p>Roles</p></td>
+<td><p>The total number of roles available in your organization</p></td>
+</tr>
+</tbody>
+</table>
+<p>Below the cards, you will find three tabs: <strong>Members</strong>, <strong>Invitations</strong>, and
+<strong>Roles</strong>. You are currently listed as the only member, with the <strong>Org Admin</strong>
+and <strong>SuperAdmin</strong> roles already assigned to you.</p>
+</section>
+</section>
+<section id="part-b-understanding-the-dashboard-tabs">
+<h2>Part B: Understanding the Dashboard Tabs<a class="headerlink" href="#part-b-understanding-the-dashboard-tabs" title="Link to this heading"></a></h2>
+<section id="members-tab">
+<h3>Members Tab<a class="headerlink" href="#members-tab" title="Link to this heading"></a></h3>
+<p>This tab lists everyone who has joined your organization. For each member, you
+can see:</p>
+<ul class="simple">
+<li><p>Their <strong>name and email</strong></p></li>
+<li><p>Their current <strong>status</strong> (Active or Blocked)</p></li>
+<li><p>The <strong>roles</strong> currently assigned to them</p></li>
+<li><p>Their <strong>last login</strong> date and time</p></li>
+<li><p>An <strong>Actions</strong> menu for managing their account</p></li>
+</ul>
+</section>
+<section id="invitations-tab">
+<h3>Invitations Tab<a class="headerlink" href="#invitations-tab" title="Link to this heading"></a></h3>
+<p>This is where you invite new colleagues. Any invitation that has been sent but
+not yet accepted will appear under <strong>Pending Invitations</strong>. Invitations expire
+after a set period – see <a class="reference internal" href="#user-management-troubleshooting"><span class="std std-ref">Troubleshooting</span></a> if a
+colleague’s invite has expired.</p>
+</section>
+<section id="roles-tab">
+<h3>Roles Tab<a class="headerlink" href="#roles-tab" title="Link to this heading"></a></h3>
+<p>This tab displays all available roles in your organization, along with a short
+description of what each role is intended for.</p>
+<figure class="align-default">
+<img alt="_images/organization-dashboard-roles-tab.png" src="_images/organization-dashboard-roles-tab.png" />
+</figure>
+<p>Use this tab whenever you need a reminder of what each role does before
+assigning it to a new team member. For a full breakdown of every role’s
+permissions and who it is designed for, refer to the <strong>Role Reference</strong>
+document.</p>
+</section>
+</section>
+<section id="part-c-inviting-your-team">
+<h2>Part C: Inviting Your Team<a class="headerlink" href="#part-c-inviting-your-team" title="Link to this heading"></a></h2>
+<p>Once you are logged in, you can start bringing your colleagues on board. Each
+person must be invited individually.</p>
+<section id="how-to-send-an-invitation">
+<h3>How to Send an Invitation<a class="headerlink" href="#how-to-send-an-invitation" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Click the <strong>Invitations</strong> tab in the Organization Dashboard.</p></li>
+<li><p>In the <strong>Send New Invitation</strong> section, enter your colleague’s work email address
+in the <strong>Email</strong> field.</p></li>
+<li><p>In the <strong>Assign Roles</strong> section, tick the checkbox next to each role you want to
+give this person. You can assign more than one role.</p></li>
+<li><p>Click <strong>Send Invite</strong>.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/organization-dashboard-send-invite.png" src="_images/organization-dashboard-send-invite.png" />
+</figure>
+<p>Your colleague will immediately receive an invitation email. The invitation will
+also appear in the <strong>Pending Invitations</strong> list until they accept it.</p>
+</section>
+<section id="choosing-the-right-role">
+<h3>Choosing the Right Role<a class="headerlink" href="#choosing-the-right-role" title="Link to this heading"></a></h3>
+<p>Not sure which role to assign? Here is a quick summary of the most commonly used
+roles:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Role</p></th>
+<th class="head"><p>Best for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Observer</p></td>
+<td><p>Managers or stakeholders who only need to view information</p></td>
+</tr>
+<tr class="row-odd"><td><p>System Analyst</p></td>
+<td><p>Support or QA engineers who need to investigate issues</p></td>
+</tr>
+<tr class="row-even"><td><p>Device Manager</p></td>
+<td><p>Field engineers who manage their own set of devices</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device Admin</p></td>
+<td><p>Senior engineers who need full access to all devices</p></td>
+</tr>
+<tr class="row-even"><td><p>Software Developer</p></td>
+<td><p>Engineers who build and test application packages</p></td>
+</tr>
+<tr class="row-odd"><td><p>Software Manager</p></td>
+<td><p>Release managers who review and approve software</p></td>
+</tr>
+<tr class="row-even"><td><p>Software Admin</p></td>
+<td><p>Senior engineers managing the full software catalogue</p></td>
+</tr>
+<tr class="row-odd"><td><p>Asset Admin</p></td>
+<td><p>Inventory managers maintaining the asset catalogue</p></td>
+</tr>
+<tr class="row-even"><td><p>User Admin</p></td>
+<td><p>IT administrators who manage users and roles</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a detailed description of every role’s permissions, see the <strong>Role
+Reference</strong>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Every user automatically receives the <strong>Default</strong> role upon account creation.
+The Default role allows signing in and managing personal settings – nothing
+more. All other roles must be assigned explicitly.</p>
+</div>
+</section>
+</section>
+<section id="part-d-what-your-invited-colleague-will-experience">
+<h2>Part D: What Your Invited Colleague Will Experience<a class="headerlink" href="#part-d-what-your-invited-colleague-will-experience" title="Link to this heading"></a></h2>
+<p>Your colleague will receive an invitation email. Here is what they need to do.</p>
+<section id="step-1-accept-the-invitation">
+<h3>Step 1: Accept the Invitation<a class="headerlink" href="#step-1-accept-the-invitation" title="Link to this heading"></a></h3>
+<p>Your colleague clicks the link in the invitation email. They are taken to a page
+that shows your organization name, their pre-filled email address, and a
+password field.</p>
+<figure class="align-default">
+<img alt="_images/accept-invitation.png" src="_images/accept-invitation.png" />
+</figure>
+<p>They enter a password and click <strong>Continue</strong> to proceed.</p>
+</section>
+<section id="step-2-set-up-their-password">
+<h3>Step 2: Set Up Their Password<a class="headerlink" href="#step-2-set-up-their-password" title="Link to this heading"></a></h3>
+<p>They are then taken to the <strong>Set your password</strong> page, where they choose a strong
+password following the same requirements outlined in
+<a class="reference internal" href="#step-set-your-password"><span class="std std-ref">Step 3: Set Your Password</span></a> above.</p>
+<p>After clicking <strong>Set Password &amp; Continue</strong>, their account is created and they
+can log in to phyHUB immediately with the roles you assigned.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Users cannot create an account on their own.</strong> If someone tries to go to
+the phyHUB login page and sign up without an invitation, they will not be
+able to join your organization. All access must be granted through the
+invitation process described here.</p>
+</div>
+</section>
+</section>
+<section id="part-e-managing-users-over-time">
+<h2>Part E: Managing Users Over Time<a class="headerlink" href="#part-e-managing-users-over-time" title="Link to this heading"></a></h2>
+<section id="reassigning-or-adding-roles-to-an-existing-member">
+<h3>Reassigning or Adding Roles to an Existing Member<a class="headerlink" href="#reassigning-or-adding-roles-to-an-existing-member" title="Link to this heading"></a></h3>
+<p>You can change a member’s roles at any time from the <strong>Members</strong> tab.</p>
+<ol class="arabic simple">
+<li><p>Find the member in the list.</p></li>
+<li><p>In the <strong>Roles</strong> column, click the dropdown (shown as <strong>+ [Role Name]</strong>) to
+see available roles.</p></li>
+<li><p>Select a role to add it. The role is assigned immediately.</p></li>
+<li><p>To remove a role, click the <strong>×</strong> next to the role name in their row.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Changes to roles take effect the next time the user performs an action or
+refreshes their session. For time-sensitive changes, ask the user to log out
+and log back in.</p>
+</div>
+</section>
+<section id="blocking-a-member">
+<h3>Blocking a Member<a class="headerlink" href="#blocking-a-member" title="Link to this heading"></a></h3>
+<p>Blocking a member immediately prevents them from logging in to phyHUB, without
+permanently deleting their account. This is useful if someone is temporarily
+away, on leave, or if you need to suspend access while reviewing an issue.</p>
+<ol class="arabic simple">
+<li><p>Go to the Members tab.</p></li>
+<li><p>Find the member you want to block.</p></li>
+<li><p>Click Actions in their row and select the option to block them.</p></li>
+<li><p>Their status will change from Active to Blocked.</p></li>
+</ol>
+<p>To restore access, follow the same steps and choose to unblock them.</p>
+</section>
+<section id="removing-a-member">
+<h3>Removing a Member<a class="headerlink" href="#removing-a-member" title="Link to this heading"></a></h3>
+<p>If someone leaves the company or no longer needs access, you can remove them
+from your organization entirely via the <strong>Actions</strong> menu in the <strong>Members</strong> tab.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the Organization Admin (or a User Admin) can block, unblock, or remove
+members.</p>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<span id="user-management-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="the-verification-email-never-arrived">
+<h3>The verification email never arrived<a class="headerlink" href="#the-verification-email-never-arrived" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check your spam or junk folder.</p></li>
+<li><p>Make sure the email address you entered during registration was correct.</p></li>
+<li><p>Some corporate email systems have strict filtering rules. Ask your IT
+department to whitelist emails from phyHUB’s sending domain.</p></li>
+<li><p>If none of these help, contact the phyHUB support team to resend the
+verification email.</p></li>
+</ul>
+</section>
+<section id="a-colleague-s-invitation-link-has-expired">
+<h3>A colleague’s invitation link has expired<a class="headerlink" href="#a-colleague-s-invitation-link-has-expired" title="Link to this heading"></a></h3>
+<p>Invitation links are valid for a limited time. If your colleague clicks the link
+and sees an error saying it has expired:</p>
+<ol class="arabic simple">
+<li><p>Go to the <strong>Invitations</strong> tab in your dashboard.</p></li>
+<li><p>Locate the expired invitation in the <strong>Pending Invitations</strong> list.</p></li>
+<li><p>Cancel the old invitation if it is still visible, then send a fresh one by
+filling in their email address again.</p></li>
+</ol>
+</section>
+<section id="a-colleague-says-they-cannot-log-in-after-accepting-the-invite">
+<h3>A colleague says they cannot log in after accepting the invite<a class="headerlink" href="#a-colleague-says-they-cannot-log-in-after-accepting-the-invite" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Check the <strong>Members</strong> tab to confirm their status shows as <strong>Active</strong> (not
+Blocked).</p></li>
+<li><p>Confirm they are using the same email address the invitation was sent to.</p></li>
+<li><p>Ask them to use the <strong>Forgot Password</strong> option on the login page to reset
+their password if they are unsure.</p></li>
+</ol>
+</section>
+<section id="a-colleague-says-they-can-log-in-but-cannot-access-certain-features">
+<h3>A colleague says they can log in but cannot access certain features<a class="headerlink" href="#a-colleague-says-they-can-log-in-but-cannot-access-certain-features" title="Link to this heading"></a></h3>
+<p>This is almost always a role issue. Go to the <strong>Members</strong> tab, find the
+colleague, and check which roles are currently assigned to them. Compare against
+the <strong>Role Reference</strong> to ensure the correct roles are set for what they need to
+do.</p>
+<hr class="docutils" />
+<p>For a complete description of every role and its permissions, see the <strong>User
+Management – Role Reference</strong>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting-started.html" class="btn btn-neutral float-left" title="Getting Started with phyHUB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="provisioning.html" class="btn btn-neutral float-right" title="Device Provisioning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, PHYTEC Messtechnik GmbH.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    Languages
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+    <dl>
+      <dt>Languages</dt>
+        
+          <dd><a href="https://phytec.github.io/doc-phyhub/index.html">en</a></dd>
+        
+    </dl>
+    
+
+    <div style="margin: 10px 0;"></div>
+    <dl>
+      <dt>Version</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

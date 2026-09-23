@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started with phyHUB &mdash; PHYTEC phyHUB Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e72c8e07" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/phytec-theme.css?v=6bd448f6" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://phytec.github.io/doc-phyhub/getting-started.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Management" href="user-management.html" />
+    <link rel="prev" title="PHYTEC phyHUB Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHYTEC phyHUB Documentation
+              <img src="_static/logo-phytec.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started with phyHUB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-this-documentation-is-organized">How This Documentation Is Organized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-create-your-account">Step 1: Create Your Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-install-the-phyhub-client-and-onboard-your-device">Step 2: Install the phyHUB Client and Onboard Your Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-explore-the-web-interface">Step 3: Explore the Web Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-automate-and-publish-with-the-cli">Step 4: Automate and Publish with the CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#document-overview">Document Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-management.html">User Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provisioning.html">Device Provisioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">UI Manual: Devices, Software &amp; Assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">phyHUB CLI Manual: Devices &amp; Software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHYTEC phyHUB Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started with phyHUB</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/phytec/doc-phyhub/blob/main/source/getting-started.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-with-phyhub">
+<h1>Getting Started with phyHUB<a class="headerlink" href="#getting-started-with-phyhub" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>phyHUB is the update, device, and security management platform of PHYTEC
+Messtechnik GmbH, developed in cooperation with our partner MLPA. It
+connects your embedded devices in the field to a central platform from
+which you control the complete software lifecycle of your fleet.</p>
+<p><strong>Core capabilities:</strong></p>
+<ul class="simple">
+<li><p><strong>Fleet management and remote updates.</strong> Manage your entire device fleet
+online and roll out application (Snap) and operating system (RAUC) updates
+over the air, from a single device to thousands.</p></li>
+<li><p><strong>Integrated security monitoring.</strong> View CVEs for each individual device and
+deploy fixes directly from the platform. phyHUB integrates seamlessly into
+your existing vulnerability management process.</p></li>
+<li><p><strong>Role-based access control.</strong> Predefined and freely configurable user roles
+let you cleanly separate development, testing, and rollout responsibilities
+within your team.</p></li>
+<li><p><strong>Simple hand-off to end customers.</strong> Give your customers access to the full
+platform, or connect a simplified, customer-facing website through the UI.</p></li>
+</ul>
+</section>
+<section id="how-this-documentation-is-organized">
+<h2>How This Documentation Is Organized<a class="headerlink" href="#how-this-documentation-is-organized" title="Link to this heading"></a></h2>
+<p>The phyHUB documentation consists of focused manuals that build on each
+other. This page is your starting point: it walks you through the
+complete path from an empty account to a fully managed device and tells
+you which manual to read at each stage.</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="user-management.html"><span class="doc">Create your account</span></a></p></li>
+<li><p><a class="reference internal" href="provisioning.html"><span class="doc">Install the phyHUB client and onboard your development kit</span></a></p></li>
+<li><p><a class="reference internal" href="ui.html"><span class="doc">Explore the user interface</span></a></p></li>
+<li><p><a class="reference internal" href="cli.html"><span class="doc">Automate and publish from the terminal</span></a></p></li>
+</ol>
+<p>Follow the steps in this order. Each manual states its prerequisites and
+points you to the next document once you are done.</p>
+</section>
+<section id="step-1-create-your-account">
+<h2>Step 1: Create Your Account<a class="headerlink" href="#step-1-create-your-account" title="Link to this heading"></a></h2>
+<p>To start evaluating phyHUB, first create an account on your platform instance.
+Registration, email verification, inviting your team, and assigning roles are
+covered in the:</p>
+<p><a class="reference internal" href="user-management.html"><span class="doc">User Management</span></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The person who creates the first account automatically becomes the
+Organization Admin of your test instance. This can be changed later, so you
+do not have to make a final decision at this point.</p>
+</div>
+</section>
+<section id="step-2-install-the-phyhub-client-and-onboard-your-device">
+<h2>Step 2: Install the phyHUB Client and Onboard Your Device<a class="headerlink" href="#step-2-install-the-phyhub-client-and-onboard-your-device" title="Link to this heading"></a></h2>
+<p>Getting your hardware onto the platform is straightforward. The evaluation runs
+on PHYTEC development kits; we provide ready-made images for three platforms:</p>
+<ul class="simple">
+<li><p><strong>phyBOARD-Pollux</strong></p></li>
+<li><p><strong>phyBOARD-Nash</strong> <em>(image coming soon)</em></p></li>
+<li><p><strong>phyBOARD-Tauri-L</strong> <em>(image coming soon)</em></p></li>
+</ul>
+<p>Your kit runs the phyHUB image from its internal eMMC storage. You boot the kit
+from the SD card it ships with, write the phyHUB image onto the eMMC from there,
+and switch the board over to booting from the eMMC. On its first boot from the
+eMMC, the device displays a claiming token on its console; you enter this token
+on the online platform and the device completes its registration automatically.
+Both parts, installing the client and activating the device, are covered in the:</p>
+<p><a class="reference internal" href="provisioning.html"><span class="doc">Device Provisioning</span></a></p>
+<p>You will need console access to your kit and a network connection with internet
+access for the board. The manual lists the exact prerequisites and network setup
+before you start.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This token-based flow is intended for evaluation and demonstration purposes.
+For production, PHYTEC provides professional, automated solutions for
+onboarding devices at scale. Contact us for details.</p>
+</div>
+</section>
+<section id="step-3-explore-the-web-interface">
+<h2>Step 3: Explore the Web Interface<a class="headerlink" href="#step-3-explore-the-web-interface" title="Link to this heading"></a></h2>
+<p>With your device online, the <a class="reference internal" href="ui.html"><span class="doc">UI Manual: Devices, Software &amp; Assets</span></a> introduces all functions of the web
+platform. Among other things, you will learn how to:</p>
+<ul class="simple">
+<li><p>Register devices and monitor their status, installation state, and logs</p></li>
+<li><p>Roll out your first application (Snap) update through a deployment group</p></li>
+<li><p>Review, rate, and release uploaded software before it can be deployed</p></li>
+<li><p>Model your physical equipment as assets and commission devices to them</p></li>
+<li><p>Attach custom attribute sets to record equipment data</p></li>
+</ul>
+</section>
+<section id="step-4-automate-and-publish-with-the-cli">
+<h2>Step 4: Automate and Publish with the CLI<a class="headerlink" href="#step-4-automate-and-publish-with-the-cli" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="cli.html"><span class="doc">phyHUB CLI Manual: Devices &amp; Software</span></a> documents <code class="docutils literal notranslate"><span class="pre">m2cp</span></code>, the phyHUB command-line client. It covers
+the platform’s device and software management from the terminal and adds
+developer capabilities that are not available in the UI:</p>
+<ul class="simple">
+<li><p>Upload new software, both applications and complete OS images, which then
+becomes available for deployment on the online platform</p></li>
+<li><p>Register new device models to make your machines known to the platform</p></li>
+<li><p>Generate snapd seeds for building custom OS images</p></li>
+<li><p>Claim devices and follow updates live from the terminal</p></li>
+</ul>
+</section>
+<section id="document-overview">
+<h2>Document Overview<a class="headerlink" href="#document-overview" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Order</p></th>
+<th class="head"><p>Document</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><a class="reference internal" href="user-management.html"><span class="doc">User Management</span></a></p></td>
+<td><p>Organization setup, invitations, user roles</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><a class="reference internal" href="provisioning.html"><span class="doc">Device Provisioning</span></a></p></td>
+<td><p>Installing the phyHUB client on a PHYTEC
+development kit and onboarding it to the
+platform</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><a class="reference internal" href="ui.html"><span class="doc">UI Manual: Devices, Software &amp; Assets</span></a></p></td>
+<td><p>Devices, software, and assets in the web</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><a class="reference internal" href="cli.html"><span class="doc">phyHUB CLI Manual: Devices &amp; Software</span></a></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">m2cp</span></code> command-line client</p></td>
+</tr>
+<tr class="row-even"><td><p>Reference</p></td>
+<td><p>Role Reference</p></td>
+<td><p>Detailed permissions of every user role</p></td>
+</tr>
+</tbody>
+</table>
+<p>If you have questions at any point during your evaluation, contact the phyHUB
+team at PHYTEC. We are happy to help.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="PHYTEC phyHUB Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user-management.html" class="btn btn-neutral float-right" title="User Management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, PHYTEC Messtechnik GmbH.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    Languages
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+    <dl>
+      <dt>Languages</dt>
+        
+          <dd><a href="https://phytec.github.io/doc-phyhub/index.html">en</a></dd>
+        
+    </dl>
+    
+
+    <div style="margin: 10px 0;"></div>
+    <dl>
+      <dt>Version</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

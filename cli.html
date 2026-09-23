@@ -1,0 +1,1161 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>phyHUB CLI Manual: Devices &amp; Software &mdash; PHYTEC phyHUB Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e72c8e07" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/phytec-theme.css?v=6bd448f6" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://phytec.github.io/doc-phyhub/cli.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="UI Manual: Devices, Software &amp; Assets" href="ui.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHYTEC phyHUB Documentation
+              <img src="_static/logo-phytec.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started with phyHUB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-management.html">User Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provisioning.html">Device Provisioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">UI Manual: Devices, Software &amp; Assets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">phyHUB CLI Manual: Devices &amp; Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-everything-connects-the-big-picture">How Everything Connects: The Big Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-and-authenticate">Install and authenticate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provision-the-device-first">Provision the device first</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cli-conventions">CLI conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-1-onboarding-a-device">Part 1: Onboarding a Device</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#claim-the-device">Claim the device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-your-devices">List your devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rename-the-device">Rename the device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inspect-a-device">Inspect a device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-2-publishing-software-building-images">Part 2: Publishing Software &amp; Building Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uploading-software">Uploading software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#push-a-model">Push a model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-seed-required-for-building-a-custom-image">Create a seed (required for building a custom image)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-3-packaging-software-for-upload">Part 3: Packaging Software for Upload</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-upload-structure">The upload structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-software-yaml-manifest">The <code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> manifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packaging-an-app-snap">Packaging an app (snap)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packaging-an-image-yocto-rauc">Packaging an image (Yocto + RAUC)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-4-software-ratings">Part 4: Software Ratings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reviewing-and-setting-ratings">Reviewing and setting ratings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-5-deployment-groups">Part 5: Deployment Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-group">Create a group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-and-inspect-groups">List and inspect groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-software-to-the-group">Add software to the group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-the-device-to-the-group">Add the device to the group</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-6-update-actions">Part 6: Update Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-update-actions-for-a-device">List update actions for a device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inspect-one-action">Inspect one action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#follow-an-update-live">Follow an update live</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-history">Installation history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggering-a-refresh">Triggering a refresh</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-7-operating-a-device-directly">Part 7: Operating a Device Directly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#putting-it-all-together-a-typical-cli-workflow">Putting It All Together: A Typical CLI Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHYTEC phyHUB Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">phyHUB CLI Manual: Devices &amp; Software</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/phytec/doc-phyhub/blob/main/source/cli.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phyhub-cli-manual-devices-software">
+<h1>phyHUB CLI Manual: Devices &amp; Software<a class="headerlink" href="#phyhub-cli-manual-devices-software" title="Link to this heading"></a></h1>
+<p>This guide walks you through the phyHUB command-line client, <code class="docutils literal notranslate"><span class="pre">m2cp</span></code>, from
+claiming a freshly provisioned device to installing software on it, watching
+updates roll out, and, for developers, publishing your own software, models, and
+seeds.</p>
+<p>It is the developer-focused counterpart to the phyHUB <strong>UI Manual</strong>. Everything
+here happens from your terminal. Asset management (asset types, models,
+instances, commissioning, attribute sets) is <strong>UI-only</strong> and is not covered by
+the CLI. See the UI Manual for that.</p>
+<hr class="docutils" />
+<section id="how-everything-connects-the-big-picture">
+<h2>How Everything Connects: The Big Picture<a class="headerlink" href="#how-everything-connects-the-big-picture" title="Link to this heading"></a></h2>
+<p>The CLI talks to the same phyHUB backend (“the store”) that the web UI
+does. Two command trees do most of the work:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m2cp device …   →  operate on a single edge device
+                   (claim, rename, inspect, watch updates, reboot)
+
+m2cp store  …   →  operate on the store / catalog
+                   (deployment groups, apps, snaps, software, models)
+
+m2cp user   …   →  authentication (login, status)
+</pre></div>
+</div>
+<p>The onboarding flow, in the order this manual follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Physical device  →  Provisioned on the device (terminal, claiming token)
+       │
+       ▼
+m2cp device claim &lt;token&gt;          Register it in the store
+       │
+       ├──▶  m2cp device modify … --name        Give it a friendly name
+       │
+       ├──▶  m2cp store dgroup create …          Create a Deployment Group
+       │           │
+       │           └──▶  m2cp store dgroup software add …   List its apps
+       │
+       └──▶  m2cp device dgroup set &lt;dev&gt; &lt;grp&gt;  Join the group
+                   │
+                   └──▶  apps install automatically → watch with
+                         m2cp device update follow
+</pre></div>
+</div>
+<p>Key concepts, in plain language:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>What it is</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Device</strong></p></td>
+<td><p>A physical edge device (e.g. a phyBOARD /
+Raspberry Pi–class gateway) registered
+with the store. Identified by an
+<strong>OS-Serial</strong> (a UUID) and, optionally, a
+friendly <strong>name</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>App / Snap</strong></p></td>
+<td><p>A snap package that runs on a device.
+Uploaded to the store, rated, then
+deployed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Software</strong></p></td>
+<td><p>The store’s umbrella term (store ≥ 5.3.0)
+covering both <strong>apps</strong> (snaps) and the
+<strong>OS image</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">phytec-liot-image</span></code>)
+that ships via RAUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deployment Group (dgroup)</strong></p></td>
+<td><p>A named group of devices of one model
+that share the same target set of
+software. Adding a device installs the
+group’s software on it automatically</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Model</strong></p></td>
+<td><p>The device model definition (type, name,
+revision, architecture, and the snaps it
+ships with). Devices of a given model can
+join dgroups built for that model</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Update Action</strong></p></td>
+<td><p>One unit of change the backend calculates
+for a device: install, update, or delete
+a piece of software. It moves through
+phases you can inspect and follow live</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Rating</strong></p></td>
+<td><p>A software version’s release status:
+<strong>Experimental</strong>, <strong>Edge</strong>, or <strong>Stable</strong>
+(all deployable) or <strong>Denied</strong> (not
+deployable). Freshly uploaded versions
+are <strong>Unrated</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Seed</strong></p></td>
+<td><p>A snapd seed: the set of snaps + model
+baked into a <strong>custom OS image</strong> at build
+time. Generated with
+<code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">system</span> <span class="pre">snapd-seed</span> <span class="pre">generate</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="before-you-begin">
+<h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Link to this heading"></a></h2>
+<section id="install-and-authenticate">
+<h3>Install and authenticate<a class="headerlink" href="#install-and-authenticate" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">m2cp</span></code> is delivered as a Debian package. Install it, then log in against your
+store’s GraphQL endpoint:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Browser-based<span class="w"> </span>login<span class="w"> </span><span class="o">(</span>opens<span class="w"> </span>your<span class="w"> </span>browser<span class="w"> </span>to<span class="w"> </span>authenticate<span class="o">)</span>
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>user<span class="w"> </span>login<span class="w"> </span>--store<span class="w"> </span>https://api.phyhub.phytec.de/graphql<span class="w"> </span>--method<span class="w"> </span>browser
+
+<span class="gp"># </span>Confirm<span class="w"> </span>who<span class="w"> </span>you<span class="w"> </span>are<span class="w"> </span>and<span class="w"> </span>which<span class="w"> </span>store<span class="w"> </span>you<span class="w"> </span>are<span class="w"> </span>pointed<span class="w"> </span>at
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>user<span class="w"> </span>status
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">m2cp</span></code> remembers your store and session, so subsequent commands need no
+<code class="docutils literal notranslate"><span class="pre">--store</span></code> flag.</p>
+</section>
+<section id="provision-the-device-first">
+<h3>Provision the device first<a class="headerlink" href="#provision-the-device-first" title="Link to this heading"></a></h3>
+<p>This step happens on the device, before you touch <code class="docutils literal notranslate"><span class="pre">m2cp</span></code>.</p>
+<p>A freshly imaged device runs the provisioning flow and prints a <strong>claiming
+token</strong> on its console. For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+--------------------------------------+
+|    Enter this token in the L-IoT     |
+|     Appstore to bind this device     |
+|           to your account:           |
+|                                      |
+|            PBTK-Q9SH-4N2B            |
+|                                      |
++--------------------------------------+
+[09:25:37] Waiting for you to enter the token in the L-IoT Appstore...
+</pre></div>
+</div>
+<p>Once you claim that token (next section), the device reports back:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[09:26:50] Device registered (OS-Serial: 73fe2304-6be9-5f4a-8086-bffcbe38f930)
+</pre></div>
+</div>
+<p>Full provisioning instructions are in the <strong>Device Provisioning Manual</strong>.
+Complete that first, then continue here.</p>
+</section>
+<section id="cli-conventions">
+<h3>CLI conventions<a class="headerlink" href="#cli-conventions" title="Link to this heading"></a></h3>
+<p>A few things that apply to every command:</p>
+<ul>
+<li><p><strong>Aliases</strong> save typing: <code class="docutils literal notranslate"><span class="pre">device</span></code> → <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">store</span></code> → <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">dgroup</span></code> →
+<code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">software</span></code> → <code class="docutils literal notranslate"><span class="pre">sw</span></code>. So <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">d</span> <span class="pre">info</span> <span class="pre">demo-device</span></code> == <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span>
+<span class="pre">info</span> <span class="pre">demo-device</span></code>.</p></li>
+<li><p><strong>Devices can be addressed by OS-Serial or name</strong> wherever a device argument
+is accepted (once you’ve named them).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--json</span></code> is a global flag on every command; add it for machine-readable
+output you can pipe into <code class="docutils literal notranslate"><span class="pre">jq</span></code>.</p></li>
+<li><p>Most write commands return a <strong>``Task-Id``</strong> and a confirmation line; that ID
+is the backend job that carried out your request.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code> works at every level:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>software<span class="w"> </span>add<span class="w"> </span>--help<span class="sb">``</span>.
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-1-onboarding-a-device">
+<h2>Part 1: Onboarding a Device<a class="headerlink" href="#part-1-onboarding-a-device" title="Link to this heading"></a></h2>
+<section id="claim-the-device">
+<h3>Claim the device<a class="headerlink" href="#claim-the-device" title="Link to this heading"></a></h3>
+<p>Feed the claiming token from the device console to <code class="docutils literal notranslate"><span class="pre">claim</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>claim<span class="w"> </span>PBTK-Q9SH-4N2B
+
+<span class="go">Task-Id: 169040e6-a9e0-4891-83fa-7b7c943ea38d</span>
+<span class="go">Message:    Device claimed successfully</span>
+<span class="go">Claim Id:   d1ab5aa2-2a00-40a6-e634-08dee67a1dd3</span>
+<span class="go">Expires At: 2026-07-21T12:26:30.222Z</span>
+</pre></div>
+</div>
+<p>This does not pull in a device directly. What it does is register the token in
+the appstore within your tenant. The device, having generated that token, waits
+to register until the store recognizes it. As long as you claim the token within
+its validity window (see <code class="docutils literal notranslate"><span class="pre">Expires</span> <span class="pre">At</span></code>), the device is then allowed to complete
+registration and is bound to your tenant.</p>
+</section>
+<section id="list-your-devices">
+<h3>List your devices<a class="headerlink" href="#list-your-devices" title="Link to this heading"></a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>list
+
+<span class="go">Serial                                  Type           Arch     Name           Store Activity    Messaging Activity    Online    Model                Uplink Mode</span>
+<span class="go">7bae3a29-a7b8-584e-995d-330f958aec46    Edge Device    ARM64    n/a            2026-07-20        2026-07-20            false     generic-arm64 (1)    SIGNALR_HUB</span>
+<span class="go">73fe2304-6be9-5f4a-8086-bffcbe38f930    Edge Device    ARM64    demo-device    2026-07-21        2026-07-21            true      generic-arm64 (1)    SIGNALR_HUB</span>
+</pre></div>
+</div>
+<p>A freshly claimed device shows up with <code class="docutils literal notranslate"><span class="pre">Name:</span> <span class="pre">n/a</span></code> and <code class="docutils literal notranslate"><span class="pre">Online:</span> <span class="pre">true</span></code> once
+it checks in.</p>
+</section>
+<section id="rename-the-device">
+<h3>Rename the device<a class="headerlink" href="#rename-the-device" title="Link to this heading"></a></h3>
+<p>Give it something memorable with <code class="docutils literal notranslate"><span class="pre">modify</span> <span class="pre">-n/--name</span></code> (the name must be unique
+within your tenant):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>modify<span class="w"> </span>73fe2304-6be9-5f4a-8086-bffcbe38f930<span class="w"> </span>--name<span class="w"> </span>demo-device
+
+<span class="go">Task-Id: f02a003b-e89e-451f-ab4d-aa989853634a</span>
+<span class="go">Message: Device '73fe2304-6be9-5f4a-8086-bffcbe38f930': active=true, name='demo-device', description='n/a'</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">modify</span></code> also carries:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--name</span></code></p></td>
+<td><p>Set a new (tenant-unique) name</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--description</span></code></p></td>
+<td><p>Set a free-text description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--device-activated</span> <span class="pre">yes|no</span></code></p></td>
+<td><p>Activate / deactivate. A
+<strong>deactivated device is denied
+communication with the server</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="inspect-a-device">
+<h3>Inspect a device<a class="headerlink" href="#inspect-a-device" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">info</span></code> is your at-a-glance dashboard for a single device: identity,
+live gateway stats, deployment group, installed software, and pending actions:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>info<span class="w"> </span>demo-device
+
+<span class="go">Device:</span>
+<span class="go">  ├─ Id:                      bce20e06-f0b8-4fd2-2adb-08dee67a3378</span>
+<span class="go">  ├─ OS Serial:               73fe2304-6be9-5f4a-8086-bffcbe38f930</span>
+<span class="go">  ├─ Name:                    demo-device</span>
+<span class="go">  ├─ Last Messaging Mode:     SIGNALR_HUB</span>
+<span class="go">  ├─ Last Uptime:             1m 48s</span>
+<span class="go">  ├─ Type:                    Edge Device</span>
+<span class="go">  ├─ Architecture:            ARM64</span>
+<span class="go">  ├─ Model Name:              generic-arm64</span>
+<span class="go">  └─ Model Revision:          1</span>
+
+<span class="go">Gateway Stats:</span>
+<span class="go">  ├─ Heartbeat Counter:       10</span>
+<span class="go">  ├─ Uptime Seconds:          108</span>
+<span class="go">  ├─ Message Hub Reachable:   yes</span>
+<span class="go">  ├─ System CPU Usage:        2%</span>
+<span class="go">  ├─ FS Free MB:              955</span>
+<span class="go">  └─ Gateway Mem Usage MB:    27</span>
+
+<span class="go">Deployment Group:</span>
+<span class="go">  ├─ Name:           demo-dgroup</span>
+<span class="go">  └─ Owner:          PhyHUB Operator (phyhub.operator@phyhub.com)</span>
+
+<span class="go">Installed Apps:</span>
+<span class="go">System    Name                Version     Revision    Description</span>
+<span class="go">-         core24              1.3.3       1           The base snap based on the Ubuntu 24.04 release.</span>
+<span class="go">-         m2cp-gateway        3.4.0       7           This snap provides the gateway to the cloud.</span>
+<span class="go">yes       snapd               5.1.0.55    14          Install, configure, refresh and remove snap packages.</span>
+
+<span class="go">Installed Image:</span>
+<span class="go">Name                 Architecture    Version       Revision    Rating          Rating Description</span>
+<span class="go">phytec-liot-image    arm64           2026-07-23    16          Stable          Demo Image</span>
+
+<span class="go">Pending Actions:</span>
+<span class="go">* No pending actions</span>
+</pre></div>
+</div>
+<p>For live troubleshooting, <code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">logs</span></code> and other hands-on commands are
+covered in <a class="reference external" href="#part-7-operating-a-device-directly">Part 7</a>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-2-publishing-software-building-images">
+<h2>Part 2: Publishing Software &amp; Building Images<a class="headerlink" href="#part-2-publishing-software-building-images" title="Link to this heading"></a></h2>
+<p>The following commands are for developers who produce software rather than just
+deploy it.</p>
+<section id="uploading-software">
+<h3>Uploading software<a class="headerlink" href="#uploading-software" title="Link to this heading"></a></h3>
+<p>Apps and OS images are both uploaded with the same command (store ≥ 5.3.0):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>software<span class="w"> </span>push<span class="w"> </span>&lt;upload.tar&gt;<span class="w"> </span><span class="s2">"&lt;version description&gt;"</span>
+
+<span class="go">Initiating upload for '.../phytec-liot-image_2026-07-23_upload.tar'</span>
+<span class="go">Uploading 769515520 bytes (upload id 019f820a3721757aa6e86b829bdeac75)</span>
+</pre></div>
+</div>
+<p>The quoted string is the <strong>version/upload description</strong>. A freshly pushed
+revision lands <strong>Unrated</strong> and cannot be deployed until a <strong>software manager</strong>
+rates it (see <a class="reference external" href="#part-4-software-ratings">Part 4</a>). Inspect the catalog
+afterwards with <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">app</span> <span class="pre">list</span></code> (add <code class="docutils literal notranslate"><span class="pre">--json</span></code> for scripting).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">upload.tar</span></code> is not just the raw <code class="docutils literal notranslate"><span class="pre">.snap</span></code> or image: it has a required
+structure and must contain a <code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> manifest. See <a class="reference external" href="#part-3-packaging-software-for-upload">Part 3</a> for how to package an app or an
+image. Once uploaded and rated, software is added to a deployment group like any
+other (<code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">software</span> <span class="pre">add</span> <span class="pre">&lt;dgroup&gt;</span> <span class="pre">&lt;software&gt;</span> <span class="pre">&lt;version&gt;</span></code>).</p>
+</section>
+<section id="push-a-model">
+<h3>Push a model<a class="headerlink" href="#push-a-model" title="Link to this heading"></a></h3>
+<p>A <strong>model</strong> describes a device type and the snaps it ships with. Push a model
+definition (a JSON file) with a message:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>model<span class="w"> </span>push<span class="w"> </span>./model-phyboard-segin-imx93-2.json<span class="w"> </span><span class="s2">"Initial model"</span>
+</pre></div>
+</div>
+<p>If a model of that name already exists, the store refuses a plain push:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Error: graphql: Model with this name is already pushed. Use update flag to push a new revision.
+</pre></div>
+</div>
+<p>Add the update flag to publish a <strong>new revision</strong> of an existing model.</p>
+<p>A model JSON looks like this (IDs are filled in by the store on push):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"brand-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLACEHOLDER"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phyboard-pollux-imx8mp-3"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"classic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"architecture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arm64"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"snaps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapd"</span><span class="p">,</span><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapd"</span><span class="p">,</span><span class="w"> </span><span class="nt">"default-channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest/stable"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core24"</span><span class="p">,</span><span class="w">           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">  </span><span class="nt">"default-channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest/stable"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m2cp-gateway"</span><span class="p">,</span><span class="w">     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">   </span><span class="nt">"default-channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest/stable"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m2cp-message-hub"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">   </span><span class="nt">"default-channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest/stable"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edge-ota-rauc"</span><span class="p">,</span><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">   </span><span class="nt">"default-channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest/stable"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-seed-required-for-building-a-custom-image">
+<h3>Create a seed (required for building a custom image)<a class="headerlink" href="#create-a-seed-required-for-building-a-custom-image" title="Link to this heading"></a></h3>
+<p>A <strong>seed</strong> is the set of snaps plus the model that get baked into a custom OS
+image at build time. Generate the seed structure from a seed YAML with <code class="docutils literal notranslate"><span class="pre">m2cp</span>
+<span class="pre">store</span> <span class="pre">system</span> <span class="pre">snapd-seed</span> <span class="pre">generate</span></code>, passing the YAML and an output directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>system<span class="w"> </span>snapd-seed<span class="w"> </span>generate<span class="w"> </span>./seed-phyboard-segin-imx93-2.yaml<span class="w"> </span>seed-phyboard-segin-imx93-2
+
+<span class="go">Skipping download of seed-phyboard-segin-imx93-2/seed/snaps/snapd_14.snap as it already exists</span>
+<span class="go">Skipping download of seed-phyboard-segin-imx93-2/seed/snaps/m2cp-gateway_7.snap as it already exists</span>
+<span class="go">Skipping download of seed-phyboard-segin-imx93-2/seed/snaps/core24_1.snap as it already exists</span>
+<span class="go">Seed structure created at: seed-phyboard-segin-imx93-2/seed</span>
+</pre></div>
+</div>
+<p>The command downloads each snap named in the seed (skipping any already present)
+and assembles the <code class="docutils literal notranslate"><span class="pre">seed/</span></code> directory your image builder consumes.</p>
+<p>A seed YAML pins the store, the model + revision, and the exact snap versions:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">store</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://api.phyhub.phytec.de/graphql</span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">phyboard-pollux-imx8mp-3</span>
+<span class="w">  </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">snaps</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snapd</span>
+<span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.1.0.55</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m2cp-gateway</span>
+<span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.4.0</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m2cp-message-hub</span>
+<span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.5.18</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core24</span>
+<span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.3</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge-ota-rauc</span>
+<span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5.1</span>
+</pre></div>
+</div>
+<p>Feed the resulting <code class="docutils literal notranslate"><span class="pre">seed/</span></code> directory into your Yocto / image build to produce
+a device image that boots pre-loaded with exactly these snaps and this model.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-3-packaging-software-for-upload">
+<h2>Part 3: Packaging Software for Upload<a class="headerlink" href="#part-3-packaging-software-for-upload" title="Link to this heading"></a></h2>
+<p>Before you can <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">software</span> <span class="pre">push</span></code> (see <a class="reference external" href="#part-2-publishing-software--building-images">Part 2</a>), the artifacts have to be
+packaged into an <code class="docutils literal notranslate"><span class="pre">upload.tar</span></code> with the structure below. This is the same
+format for apps and images; only the files inside <code class="docutils literal notranslate"><span class="pre">artifact/</span></code> differ.</p>
+<section id="the-upload-structure">
+<h3>The upload structure<a class="headerlink" href="#the-upload-structure" title="Link to this heading"></a></h3>
+<p>Every upload is a <code class="docutils literal notranslate"><span class="pre">.tar</span></code> archive with a fixed layout:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upload.tar
+  artifact/
+    software.yaml      # required manifest (see below)
+    &lt;artifact files&gt;   # the .snap, image, and/or RAUC bundle
+  sbom/                # optional SBOM documents (stored, never sent to devices)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The archive’s file name does not matter (<code class="docutils literal notranslate"><span class="pre">upload.tar</span></code> here is just a
+placeholder); only its contents are read.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artifact/</span></code> and <code class="docutils literal notranslate"><span class="pre">artifact/software.yaml</span></code> are <strong>required</strong>.</p></li>
+<li><p>The other files in <code class="docutils literal notranslate"><span class="pre">artifact/</span></code> depend on what you package (snap vs. image);
+see below. File roles are determined by <strong>extension</strong>, not by file name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sbom/</span></code> is optional.</p></li>
+</ul>
+</section>
+<section id="the-software-yaml-manifest">
+<h3>The <code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> manifest<a class="headerlink" href="#the-software-yaml-manifest" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> is the manifest the backend reads to identify the revision and
+to decide how to handle the rest of <code class="docutils literal notranslate"><span class="pre">artifact/</span></code>. Common fields:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required for</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">format-version</span></code></p></td>
+<td><p>all</p></td>
+<td><p>Manifest format
+version. Currently
+<code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">category</span></code></p></td>
+<td><p>all</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">app</span></code> or <code class="docutils literal notranslate"><span class="pre">image</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></td>
+<td><p>app, image</p></td>
+<td><p>Class within the
+category (<code class="docutils literal notranslate"><span class="pre">snap</span></code>
+for apps, <code class="docutils literal notranslate"><span class="pre">yocto</span></code>
+for images).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">update-mechanism</span></code></p></td>
+<td><p>image</p></td>
+<td><p>OTA mechanism.
+<code class="docutils literal notranslate"><span class="pre">rauc</span></code> for images.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">software-name</span></code></p></td>
+<td><p>all</p></td>
+<td><p>Software name.
+Matches the name used
+in update actions and
+refresh requests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">software-version</span></code></p></td>
+<td><p>all</p></td>
+<td><p>Software version.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summary</span></code></p></td>
+<td><p>image</p></td>
+<td><p>Short description of
+the software.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">architecture</span></code></p></td>
+<td><p>image</p></td>
+<td><p>Target CPU
+architecture
+(<code class="docutils literal notranslate"><span class="pre">arm32</span></code>,
+<code class="docutils literal notranslate"><span class="pre">arm64</span></code>, <code class="docutils literal notranslate"><span class="pre">amd64</span></code>,
+…).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">device-model</span></code></p></td>
+<td><p>image</p></td>
+<td><p>Target device model
+name as registered in
+the store.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Optional fields: <code class="docutils literal notranslate"><span class="pre">device-model-version</span></code> (restrict the artifact to one model
+version) and a <code class="docutils literal notranslate"><span class="pre">build:</span></code> block (<code class="docutils literal notranslate"><span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">upstream-version</span></code>, <code class="docutils literal notranslate"><span class="pre">datetime</span></code>)
+for provenance.</p>
+<p>The <strong>revision identity</strong> is the combination of <code class="docutils literal notranslate"><span class="pre">software-name</span></code>,
+<code class="docutils literal notranslate"><span class="pre">software-version</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, and, for images, <code class="docutils literal notranslate"><span class="pre">update-mechanism</span></code>,
+<code class="docutils literal notranslate"><span class="pre">device-model</span></code>, and <code class="docutils literal notranslate"><span class="pre">device-model-version</span></code>. If an upload’s identity matches
+an existing revision it extends that revision; otherwise it creates a new one.</p>
+</section>
+<section id="packaging-an-app-snap">
+<h3>Packaging an app (snap)<a class="headerlink" href="#packaging-an-app-snap" title="Link to this heading"></a></h3>
+<p>For an app, <code class="docutils literal notranslate"><span class="pre">artifact/</span></code> holds <code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> and exactly one <code class="docutils literal notranslate"><span class="pre">.snap</span></code>
+file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upload.tar
+  artifact/
+    software.yaml
+    &lt;any-name&gt;.snap
+</pre></div>
+</div>
+<p>The snap manifest is minimal. The backend extracts the rest (summary,
+architecture, base, confinement, …) from <code class="docutils literal notranslate"><span class="pre">meta/snap.yaml</span></code> inside the
+<code class="docutils literal notranslate"><span class="pre">.snap</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">format-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snap</span>
+<span class="nt">software-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge-ota-rauc</span>
+<span class="nt">software-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5.3</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">software-name</span></code> and <code class="docutils literal notranslate"><span class="pre">software-version</span></code> MUST match <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code>
+in the snap’s <code class="docutils literal notranslate"><span class="pre">meta/snap.yaml</span></code>, otherwise the upload is rejected.</p>
+</section>
+<section id="packaging-an-image-yocto-rauc">
+<h3>Packaging an image (Yocto + RAUC)<a class="headerlink" href="#packaging-an-image-yocto-rauc" title="Link to this heading"></a></h3>
+<p>For an OS image, <code class="docutils literal notranslate"><span class="pre">artifact/</span></code> holds <code class="docutils literal notranslate"><span class="pre">software.yaml</span></code> plus a provisioning image
+and a RAUC bundle:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upload.tar
+  artifact/
+    software.yaml
+    &lt;any-name&gt;.&lt;wic|img|partup&gt;   # provisioning image, flashed onto a fresh device
+    &lt;any-name&gt;.raucb              # RAUC bundle, the OTA update deliverable
+</pre></div>
+</div>
+<p>The provisioning image (<code class="docutils literal notranslate"><span class="pre">.wic</span></code> / <code class="docutils literal notranslate"><span class="pre">.img</span></code> / <code class="docutils literal notranslate"><span class="pre">.partup</span></code>) is used to flash new
+devices; the <code class="docutils literal notranslate"><span class="pre">.raucb</span></code> bundle is what devices download for OTA updates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An image upload currently requires <strong>both</strong> files in the same <code class="docutils literal notranslate"><span class="pre">upload.tar</span></code>:
+the provisioning image <strong>and</strong> the RAUC bundle.</p>
+</div>
+<p>The image manifest carries the full common fields:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">format-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yocto</span>
+<span class="nt">update-mechanism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rauc</span>
+<span class="nt">software-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">phytec-liot-image</span>
+<span class="nt">software-version</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-07-23"</span>
+<span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">"PHYTEC</span><span class="nv"> </span><span class="s">L-IoT</span><span class="nv"> </span><span class="s">image</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">phyboard-pollux</span><span class="nv"> </span><span class="s">imx8mp"</span>
+<span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm64</span>
+<span class="nt">device-model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic-arm64</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">upload.tar</span></code> built, publish it as shown in <a class="reference external" href="#part-2-publishing-software--building-images">Part 2</a>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-4-software-ratings">
+<h2>Part 4: Software Ratings<a class="headerlink" href="#part-4-software-ratings" title="Link to this heading"></a></h2>
+<p>Every software version carries a rating that gates deployment. This is identical
+to the UI’s approval model:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rating</p></th>
+<th class="head"><p>Deployable?</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Unrated</strong></p></td>
+<td><p>No</p></td>
+<td><p>Freshly uploaded, not
+yet reviewed</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Experimental</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Early-stage /
+developer build</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Edge</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Field-ready, not
+fully
+production-validated</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stable</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Fully validated,
+production-ready</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Denied</strong></p></td>
+<td><p>No</p></td>
+<td><p>Rejected</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deprecated</strong></p></td>
+<td><p>No</p></td>
+<td><p>Retired / superseded;
+no longer for new
+deployments</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ratings are assigned <strong>after</strong> upload by a <strong>software manager</strong>, not by whoever
+uploads the software. A freshly uploaded version stays <strong>Unrated</strong> until a
+software manager reviews it and gives it a rating. Ratings can also be changed
+later as a version is re-evaluated (for example, downgraded once it turns out to
+be broken). Ratings and their descriptions are visible in <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">info</span></code>
+and <code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">info</span></code> output (the <code class="docutils literal notranslate"><span class="pre">Rating</span></code> / <code class="docutils literal notranslate"><span class="pre">Rating</span> <span class="pre">Description</span></code> columns).</p>
+<section id="reviewing-and-setting-ratings">
+<h3>Reviewing and setting ratings<a class="headerlink" href="#reviewing-and-setting-ratings" title="Link to this heading"></a></h3>
+<p>A software manager reviews the queue and sets ratings from the CLI with <code class="docutils literal notranslate"><span class="pre">store</span>
+<span class="pre">software</span> <span class="pre">rate</span></code>.</p>
+<p>List software by rating (defaults to <strong>Unrated</strong>, i.e. the review queue):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>software<span class="w"> </span>rate<span class="w"> </span>list
+
+<span class="go">Task-Id: eb1b018f-83e7-4353-9a8c-cf9ba2a86860</span>
+<span class="go">Software                Architecture    Version             Rating     Uploaded            Developer Note</span>
+<span class="go">snapd                   arm64           5.1.0.0-dev1 (7)    Unrated    2026-07-04 21:34    Fix recovery on full system upgrade</span>
+<span class="go">test-firmware-upload    arm32           3.3.0 (1)           Unrated    2026-07-16 07:20    Test</span>
+</pre></div>
+</div>
+<p>The <strong>Developer Note</strong> column is the version/upload description the uploader
+supplied at push time.</p>
+<p>Set a rating with <code class="docutils literal notranslate"><span class="pre">rate</span> <span class="pre">set</span></code>. It takes five arguments, <code class="docutils literal notranslate"><span class="pre">&lt;softwareName&gt;</span>
+<span class="pre">&lt;architecture&gt;</span> <span class="pre">&lt;revision&gt;</span> <span class="pre">&lt;rating&gt;</span> <span class="pre">&lt;description&gt;</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>software<span class="w"> </span>rate<span class="w"> </span><span class="nb">set</span><span class="w"> </span>snapd<span class="w"> </span>arm64<span class="w"> </span><span class="m">7</span><span class="w"> </span>Deprecated<span class="w"> </span><span class="s2">"Outdated"</span>
+
+<span class="go">Rating of software snapd (ARM64) version 5.1.0.0-dev1 (7) updated to Deprecated</span>
+</pre></div>
+</div>
+<p>The final <code class="docutils literal notranslate"><span class="pre">description</span></code> becomes the <strong>Rating Description</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;revision&gt;</span></code> argument is the numeric revision (e.g. <code class="docutils literal notranslate"><span class="pre">7</span></code>), not the
+version string (<code class="docutils literal notranslate"><span class="pre">5.1.0.0-dev1</span></code>). Passing a version currently fails with
+<code class="docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">software</span> <span class="pre">revision</span></code>. Support for addressing by version is coming.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-5-deployment-groups">
+<h2>Part 5: Deployment Groups<a class="headerlink" href="#part-5-deployment-groups" title="Link to this heading"></a></h2>
+<p>A deployment group holds a target set of software. Add a device to the group and
+it installs that software automatically.</p>
+<section id="create-a-group">
+<h3>Create a group<a class="headerlink" href="#create-a-group" title="Link to this heading"></a></h3>
+<p>Create a group for a given model. The model form takes <code class="docutils literal notranslate"><span class="pre">&lt;modelType&gt;</span> <span class="pre">&lt;modelName&gt;</span>
+<span class="pre">&lt;modelRevision&gt;</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>create<span class="w"> </span>demo-dgroup<span class="w"> </span>m2cp<span class="w"> </span>generic-arm64<span class="w"> </span><span class="m">1</span>
+
+<span class="go">Task-Id: 586e2e3a-b033-43f0-a40f-06756889d045</span>
+<span class="go">Deployment Group created from model</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">create</span></code> accepts a few forms of the second argument:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Form</p></th>
+<th class="head"><p>Arguments after the name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>From a model triple</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;modelType&gt;</span> <span class="pre">&lt;modelName&gt;</span> <span class="pre">&lt;modelRevision&gt;</span></code>
+(as above)</p></td>
+</tr>
+<tr class="row-odd"><td><p>From an existing device</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;deviceName</span> <span class="pre">\|</span> <span class="pre">osSerial&gt;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Creating a group <strong>from a device</strong> is a handy shortcut: instead of listing
+software by hand, the group inherits the device’s model <em>and</em> seeds its target
+set from that device’s current install state as known to the store. In other
+words, the software already reported on that device becomes the group’s target.
+You can then adjust it with <code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">add</span></code> / <code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">modify</span></code> as usual.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>create<span class="w"> </span>demo-dgroup<span class="w"> </span>demo-device
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>The OS image is not assigned automatically.</strong> When a group is created
+(including from a device), its target set does not include the image. The
+appstore still <em>detects</em> the image already present on a device and reports
+it, but it is not part of the group’s target. So whenever you want to update
+or change the image, you must <strong>add it to the group first</strong> with <code class="docutils literal notranslate"><span class="pre">store</span>
+<span class="pre">dgroup</span> <span class="pre">software</span> <span class="pre">add</span></code> (see below); only then will the change be rolled out.</p>
+</div>
+<p>Optional flag: <code class="docutils literal notranslate"><span class="pre">-d/--description</span></code> sets a description for the group.</p>
+</section>
+<section id="list-and-inspect-groups">
+<h3>List and inspect groups<a class="headerlink" href="#list-and-inspect-groups" title="Link to this heading"></a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>list
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>info<span class="w"> </span>demo-dgroup
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">info</span></code> shows the group’s model, owner, pending-action count, its
+member <strong>Devices</strong>, and the target <strong>Software (App)</strong> table:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Deployment Group
+    ├── Id:              37249cad-f0e8-40f4-7940-08dee67a49bd
+    ├── Name:            demo-dgroup
+    ├── Model
+    │   ├── Type:            Edge Device
+    │   ├── Name:            generic-arm64
+    │   └── Revision:        1
+    ├── Owner:           PhyHUB Operator (phyhub.operator@phyhub.com)
+    └── Pending Actions: 1
+
+Devices
+Serial                                  Name           Pending Actions
+73fe2304-6be9-5f4a-8086-bffcbe38f930    demo-device    0
+
+Software (App)
+Core    Name                Version          Rating          Version Description
+-       core24              1.3.3 (1)        Stable          republish core24
+-       m2cp-gateway        3.4.0 (7)        Stable          Release 3.4.0 with updated D-Bus interfaces
+yes     snapd               5.1.0.55 (14)    Edge            OTA support, Yocto adjustments
+</pre></div>
+</div>
+</section>
+<section id="add-software-to-the-group">
+<h3>Add software to the group<a class="headerlink" href="#add-software-to-the-group" title="Link to this heading"></a></h3>
+<p>Add a software version to the group’s target set. The third argument is the
+software <code class="docutils literal notranslate"><span class="pre">version</span></code> (or the literal <code class="docutils literal notranslate"><span class="pre">latest</span></code> for the newest):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Add<span class="w"> </span>an<span class="w"> </span>app<span class="w"> </span>by<span class="w"> </span>version
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>software<span class="w"> </span>add<span class="w"> </span>demo-dgroup<span class="w"> </span>hello-world<span class="w"> </span><span class="m">6</span>.4.2
+
+<span class="gp"># </span>Add<span class="w"> </span>the<span class="w"> </span>OS<span class="w"> </span>image<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>way
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>software<span class="w"> </span>add<span class="w"> </span>demo-dgroup<span class="w"> </span>phytec-liot-image<span class="w"> </span><span class="m">2026</span>-07-23
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Task-Id: e61bcd50-e7f4-46a3-a280-66db24d09727
+Software added to Deployment Group
+</pre></div>
+</div>
+<p>To move the group to a different version later, use <code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">modify</span></code> (not
+<code class="docutils literal notranslate"><span class="pre">add</span></code>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>store<span class="w"> </span>dgroup<span class="w"> </span>software<span class="w"> </span>modify<span class="w"> </span>demo-dgroup<span class="w"> </span>phytec-liot-image<span class="w"> </span><span class="m">2026</span>-07-24
+
+<span class="go">Task-Id: 3ed0f7e4-956e-4155-b430-35a2193dc2d8</span>
+<span class="go">Software revision modified in Deployment Group</span>
+</pre></div>
+</div>
+<p>Remove software from the group with <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">software</span> <span class="pre">remove</span> <span class="pre">&lt;dgroup&gt;</span>
+<span class="pre">&lt;software&gt;</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only rated software (<strong>Experimental</strong>, <strong>Edge</strong>, <strong>Stable</strong>) can be added.
+<strong>Unrated</strong> and <strong>Denied</strong> versions are rejected. See <a class="reference external" href="#part-3-software-ratings">Part 3</a>.</p>
+</div>
+</section>
+<section id="add-the-device-to-the-group">
+<h3>Add the device to the group<a class="headerlink" href="#add-the-device-to-the-group" title="Link to this heading"></a></h3>
+<p>This is the step that actually triggers installs. Assign the device to the
+group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>dgroup<span class="w"> </span><span class="nb">set</span><span class="w"> </span>demo-device<span class="w"> </span>demo-dgroup
+
+<span class="go">Task-Id: fe8242d4-333e-4b34-9ec2-6d5046843cdf</span>
+<span class="go">assigned Device 73fe2304-6be9-5f4a-8086-bffcbe38f930 (demo-device) to Deployment Group 37249cad-f0e8-40f4-7940-08dee67a49bd (demo-dgroup)</span>
+</pre></div>
+</div>
+<p>The backend now calculates update actions and pushes the group’s software to the
+device. If you ever need to take the device back out of the group, you can do so
+with <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">dgroup</span> <span class="pre">unset</span> <span class="pre">&lt;device&gt;</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A device belongs to at most one deployment group.</strong> To change what it runs,
+edit its current group’s software or <code class="docutils literal notranslate"><span class="pre">set</span></code> it to a different group.</p>
+</div>
+<p>Right after assignment, <code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">info</span></code> will show the incoming work under
+<strong>Pending Actions</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Pending Actions:
+Action     App            Current    Target       Download    Delta
+Install    hello-world    - (-)      6.4.2 (2)    20.0KB      n/a
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Pending Actions</strong> is the legacy way of showing outstanding updates for a
+device. A transition to the new <strong>update actions</strong> (see <a class="reference external" href="#part-6-update-actions">Part 6</a>) is in progress, so you will see both for now.
+Update actions are more powerful: they carry a <strong>state</strong> and allow
+<strong>fine-grained, per-action logs</strong>.</p>
+</div>
+</section>
+</section>
+<section id="part-6-update-actions">
+<h2>Part 6: Update Actions<a class="headerlink" href="#part-6-update-actions" title="Link to this heading"></a></h2>
+<p>An <strong>update action</strong> is one calculated change for a device: install an app,
+update an app, update the OS image, or delete something. This is where you watch
+software actually land.</p>
+<section id="list-update-actions-for-a-device">
+<h3>List update actions for a device<a class="headerlink" href="#list-update-actions-for-a-device" title="Link to this heading"></a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>list<span class="w"> </span>demo-device
+
+<span class="go">Id                                      Software         Category    Type          Started                Current         Target      Status</span>
+<span class="go">87b8af98-9d67-4d9a-8b7c-08dee67a5523    hello-world      App         INSTALLING    2026-07-21 10:02:04    -               6.4.2       SUCCEEDED</span>
+<span class="go">93fd869e-5f36-4778-8b79-08dee67a5523    snapd            App         UPDATING      2026-07-21 09:56:54    5.1.0.0-dev7    5.1.0.55    SUCCEEDED</span>
+<span class="go">02777d97-540b-44e0-8b7b-08dee67a5523    m2cp-gateway     App         UPDATING      2026-07-21 09:56:54    3.3.11          3.4.0       SUCCEEDED</span>
+</pre></div>
+</div>
+<p>If a device has no work queued you’ll simply see <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">update</span> <span class="pre">actions</span> <span class="pre">found</span></code>.</p>
+</section>
+<section id="inspect-one-action">
+<h3>Inspect one action<a class="headerlink" href="#inspect-one-action" title="Link to this heading"></a></h3>
+<p>Pass an action Id to <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">info</span></code> for the full phase-by-phase trace:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>info<span class="w"> </span>87b8af98-9d67-4d9a-8b7c-08dee67a5523
+
+<span class="go">Id:        87b8af98-9d67-4d9a-8b7c-08dee67a5523</span>
+<span class="go">Software:  hello-world (arm64)</span>
+<span class="go">Type:      INSTALLING</span>
+<span class="go">Current:   -</span>
+<span class="go">Target:    6.4.2</span>
+<span class="go">Status:    SUCCEEDED</span>
+
+<span class="go">Timestamp              Component    Phase          Mechanism    Status      Message</span>
+<span class="go">2026-07-21 10:02:04    BACKEND      PREPARATION                 Done        New update action calculated</span>
+<span class="go">2026-07-21 10:02:19    TARGET       DOWNLOAD       SNAP         Progress    Download snap "hello-world" (2) from channel "stable"</span>
+<span class="go">2026-07-21 10:02:22    TARGET       INSTALL        SNAP         Progress    Mount snap "hello-world" (2)</span>
+<span class="go">2026-07-21 10:02:35    TARGET       ACTIVATE       SNAP         Done        Make snap "hello-world" (2) available to the system</span>
+<span class="go">2026-07-21 10:02:39    TARGET       ACTIVATE       SNAP         Done        Run health check of "hello-world" snap</span>
+</pre></div>
+</div>
+<p>In the trace, the <strong>Component</strong> column shows where each step ran, one of
+<code class="docutils literal notranslate"><span class="pre">BACKEND</span></code> (the store), <code class="docutils literal notranslate"><span class="pre">PROXY</span></code> (the device’s update proxy), or <code class="docutils literal notranslate"><span class="pre">TARGET</span></code>
+(the device itself).</p>
+</section>
+<section id="follow-an-update-live">
+<h3>Follow an update live<a class="headerlink" href="#follow-an-update-live" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">follow</span></code> opens a live TUI that refreshes as the device reports
+progress. It is the best way to watch an OS image roll out:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">follow</span></code> is not available in <code class="docutils literal notranslate"><span class="pre">--json</span></code> mode. It is a development
+and debugging aid, not a command intended for automation. For scripting, use
+<code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">list</span></code> / <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">info</span></code> instead.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Follow<span class="w"> </span>all<span class="w"> </span>active<span class="w"> </span>actions<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>device
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>follow<span class="w"> </span>demo-device
+
+<span class="gp"># </span>Or<span class="w"> </span>follow<span class="w"> </span>a<span class="w"> </span>single<span class="w"> </span>action<span class="w"> </span>by<span class="w"> </span>Id
+<span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>follow<span class="w"> </span>fd37b08c-21e8-469f-8b7d-08dee67a5523
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>follow<span class="w">  </span>update<span class="w"> </span>action<span class="w"> </span>fd37b08c<span class="w">  </span>·<span class="w">  </span>updated<span class="w"> </span>just<span class="w"> </span>now
+
+<span class="go">▸ Details — phytec-liot-image · started 32s ago</span>
+<span class="go">Type     UPDATING</span>
+<span class="go">Status   ▶ IN_PROGRESS</span>
+<span class="go">Version  2026-07-23 → 2026-07-24</span>
+<span class="go">When     Component  Phase            Mechanism  Status    Message</span>
+<span class="go">25s ago  PROXY      ACTION_RECEIVED  RAUC       Done      Successfully received update action</span>
+<span class="go">24s ago  TARGET     INSTALL          RAUC       Progress  installation progress: 42% Copying image to rootfs.1</span>
+<span class="go">...</span>
+<span class="go">↑/↓ scroll · r refresh · q quit</span>
+</pre></div>
+</div>
+<p>Press <code class="docutils literal notranslate"><span class="pre">r</span></code> to force a refresh and <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit. An OS-image update finishes
+with a reboot:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>2026-07-21 10:13:31    TARGET    INSTALL     RAUC    Done        installation of artifact completed successfully
+2026-07-21 10:13:31    PROXY     ACTIVATE    RAUC    Progress    refresh cycle completed successfully, rebooting system
+</pre></div>
+</div>
+<p>After the reboot, <code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">info</span></code> shows the new <code class="docutils literal notranslate"><span class="pre">Installed</span> <span class="pre">Image</span></code> version and
+<code class="docutils literal notranslate"><span class="pre">Pending</span> <span class="pre">Actions:</span> <span class="pre">*</span> <span class="pre">No</span> <span class="pre">pending</span> <span class="pre">actions</span></code>.</p>
+</section>
+<section id="installation-history">
+<h3>Installation history<a class="headerlink" href="#installation-history" title="Link to this heading"></a></h3>
+<p>For the full record of past installs, updates, and removals on a device:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span><span class="nb">history</span><span class="w"> </span>demo-device
+</pre></div>
+</div>
+</section>
+<section id="triggering-a-refresh">
+<h3>Triggering a refresh<a class="headerlink" href="#triggering-a-refresh" title="Link to this heading"></a></h3>
+<p>A device checks in on its own schedule, and the backend also triggers a refresh
+automatically once whenever a device is online or comes online. To make it look
+for and apply outstanding updates right now, send it a refresh trigger:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>trigger<span class="w"> </span><span class="k">do</span><span class="w"> </span>demo-device
+</pre></div>
+</div>
+<p>To see the triggers sent to a device, whether the device actually received them,
+and any that are still scheduled, use <code class="docutils literal notranslate"><span class="pre">trigger</span> <span class="pre">history</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>m2cp<span class="w"> </span>device<span class="w"> </span>update<span class="w"> </span>trigger<span class="w"> </span><span class="nb">history</span><span class="w"> </span>demo-device
+
+<span class="go">Task-Id: 505c9976-ce04-4ac4-814a-97cfada36d22</span>
+<span class="go">Created                Command              Status     Expires At             Responded At           Id</span>
+<span class="go">2026-07-21 10:36:43    TriggerRefresh       Success    2026-07-21 10:36:43    2026-07-21 10:36:43    c4bc4bb4-6fb6-4551-8730-08dee67a8a99</span>
+<span class="go">2026-07-21 10:04:35    TriggerRefresh       Success    2026-07-21 10:04:36    2026-07-21 10:04:36    722b4820-000d-4ac9-872f-08dee67a8a99</span>
+<span class="go">2026-07-21 10:02:09    DeviceSnapRefresh    Expired    2026-07-21 10:02:39    -                      0f03a8bc-19a6-459a-872e-08dee67a8a99</span>
+<span class="go">2026-07-21 09:57:31    DeviceSnapRefresh    Expired    2026-07-21 09:58:01    -                      a48385b9-e6a3-4f53-872d-08dee67a8a99</span>
+<span class="go">2026-07-21 09:56:59    DeviceSnapRefresh    Expired    2026-07-21 09:57:29    -                      e4efa59b-f0b2-4cd5-872c-08dee67a8a99</span>
+</pre></div>
+</div>
+<p>Each row is a trigger the store sent to the device. The <strong>Status</strong> column tells
+you whether the device picked it up: <code class="docutils literal notranslate"><span class="pre">Success</span></code> means the device received and
+responded to it (see <strong>Responded At</strong>), while <code class="docutils literal notranslate"><span class="pre">Expired</span></code> means it was not
+collected before its <strong>Expires At</strong> time, i.e. the device never received it
+because the request timed out.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-7-operating-a-device-directly">
+<h2>Part 7: Operating a Device Directly<a class="headerlink" href="#part-7-operating-a-device-directly" title="Link to this heading"></a></h2>
+<p>Beyond updates, the <code class="docutils literal notranslate"><span class="pre">device</span></code> tree gives you hands-on access, handy during
+bring-up and debugging:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">logs</span> <span class="pre">&lt;device&gt;</span></code></p></td>
+<td><p>Fetch / stream logs from the
+device</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">reboot</span> <span class="pre">&lt;device&gt;</span></code></p></td>
+<td><p>Reboot the device</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">ping</span> <span class="pre">&lt;address&gt;</span></code></p></td>
+<td><p>Ping an m2cp address and report
+the reached node’s uptime</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="putting-it-all-together-a-typical-cli-workflow">
+<h2>Putting It All Together: A Typical CLI Workflow<a class="headerlink" href="#putting-it-all-together-a-typical-cli-workflow" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Provision the device on the hardware; note its <strong>claiming token</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">user</span> <span class="pre">login</span> <span class="pre">--store</span> <span class="pre">&lt;url&gt;</span> <span class="pre">--method</span> <span class="pre">browser</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">claim</span> <span class="pre">&lt;token&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">modify</span> <span class="pre">&lt;serial&gt;</span> <span class="pre">--name</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">create</span> <span class="pre">&lt;name&gt;</span> <span class="pre">&lt;modelType&gt;</span> <span class="pre">&lt;modelName&gt;</span> <span class="pre">&lt;revision&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">software</span> <span class="pre">add</span> <span class="pre">&lt;dgroup&gt;</span> <span class="pre">&lt;software&gt;</span> <span class="pre">&lt;version&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">dgroup</span> <span class="pre">set</span> <span class="pre">&lt;device&gt;</span> <span class="pre">&lt;dgroup&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">update</span> <span class="pre">follow</span> <span class="pre">&lt;device&gt;</span></code> (watch installs land)</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">info</span> <span class="pre">&lt;device&gt;</span></code> (confirm installed software)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Developer / publishing steps, as needed:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Package an app or image</p></td>
+<td><p>Build an <code class="docutils literal notranslate"><span class="pre">upload.tar</span></code> (see <a class="reference external" href="#part-3-packaging-software-for-upload">Part
+3</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Publish software (app/image)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">software</span> <span class="pre">push</span> <span class="pre">&lt;upload.tar&gt;</span> <span class="pre">&quot;&lt;version</span> <span class="pre">desc&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Push a model</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">model</span> <span class="pre">push</span> <span class="pre">./&lt;model&gt;.json</span> <span class="pre">&quot;&lt;msg&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Create a seed</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">store</span> <span class="pre">system</span> <span class="pre">snapd-seed</span> <span class="pre">generate</span> <span class="pre">./&lt;seed&gt;.yaml</span> <span class="pre">&lt;out-dir&gt;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>How do I address a device, by serial or by name?</dt><dd><p>Either, every <code class="docutils literal notranslate"><span class="pre">device</span></code> subcommand accepts the OS-Serial (the UUID) or the
+friendly name you set with <code class="docutils literal notranslate"><span class="pre">modify</span> <span class="pre">--name</span></code>. Names must be unique within
+your tenant.</p>
+</dd>
+<dt>Can I get machine-readable output?</dt><dd><p>Yes. Append <code class="docutils literal notranslate"><span class="pre">--json</span></code> to any command and pipe it into <code class="docutils literal notranslate"><span class="pre">jq</span></code>.</p>
+</dd>
+<dt>What’s the difference between <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">dgroup</span> <span class="pre">software</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">modify</span></code>?</dt><dd><p><code class="docutils literal notranslate"><span class="pre">add</span></code> puts a software version into a group that doesn’t have it yet;
+<code class="docutils literal notranslate"><span class="pre">modify</span></code> changes the target version of software already in the group. Using
+<code class="docutils literal notranslate"><span class="pre">add</span></code> on something already present is an error.</p>
+</dd>
+<dt>A device can be in more than one deployment group, right?</dt><dd><p>No. Exactly one at a time. Use <code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">dgroup</span> <span class="pre">set</span></code> to move it or <code class="docutils literal notranslate"><span class="pre">device</span>
+<span class="pre">dgroup</span> <span class="pre">unset</span></code> to remove it.</p>
+</dd>
+<dt>How do I trigger an update check manually?</dt><dd><p><code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span> <span class="pre">update</span> <span class="pre">trigger</span> <span class="pre">do</span> <span class="pre">&lt;device&gt;</span></code>.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ui.html" class="btn btn-neutral float-left" title="UI Manual: Devices, Software &amp; Assets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, PHYTEC Messtechnik GmbH.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    Languages
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+    <dl>
+      <dt>Languages</dt>
+        
+          <dd><a href="https://phytec.github.io/doc-phyhub/index.html">en</a></dd>
+        
+    </dl>
+    
+
+    <div style="margin: 10px 0;"></div>
+    <dl>
+      <dt>Version</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

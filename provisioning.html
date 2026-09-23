@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Provisioning &mdash; PHYTEC phyHUB Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e72c8e07" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/phytec-theme.css?v=6bd448f6" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://phytec.github.io/doc-phyhub/provisioning.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UI Manual: Devices, Software &amp; Assets" href="ui.html" />
+    <link rel="prev" title="User Management" href="user-management.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHYTEC phyHUB Documentation
+              <img src="_static/logo-phytec.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started with phyHUB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-management.html">User Management</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Device Provisioning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-setup">Network Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-a-install-the-phyhub-client-on-your-development-kit">Part A: Install the phyHUB Client on Your Development Kit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-download-the-image-for-your-board">Step 1: Download the Image for Your Board</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-boot-the-kit-from-its-sd-card">Step 2: Boot the Kit from Its SD Card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-write-the-image-to-the-e-mmc">Step 3: Write the Image to the e.MMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-switch-to-the-e-mmc-and-boot">Step 4: Switch to the e.MMC and Boot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-b-activate-the-device-on-the-platform">Part B: Activate the Device on the Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-find-your-claiming-token">Step 1: Find Your Claiming Token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-log-in-to-phyhub">Step 2: Log In to phyHUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-enter-your-claiming-token">Step 3: Enter Your Claiming Token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-wait-for-your-device-to-register">Step 4: Wait for Your Device to Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-confirm-activation">Step 5: Confirm Activation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-token-expired-before-registration-completed">The token expired before registration completed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-device-does-not-show-a-token">The device does not show a token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#you-cannot-reach-the-board-via-ssh-in-part-a">You cannot reach the board via SSH in Part A</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-board-still-shows-the-phytec-demo-system-or-does-not-boot-after-switching-to-the-e-mmc">The board still shows the PHYTEC demo system or does not boot after switching to the e.MMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phyhub-says-the-token-is-invalid">phyHUB says the token is invalid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">UI Manual: Devices, Software &amp; Assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">phyHUB CLI Manual: Devices &amp; Software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHYTEC phyHUB Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Device Provisioning</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/phytec/doc-phyhub/blob/main/source/provisioning.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-provisioning">
+<h1>Device Provisioning<a class="headerlink" href="#device-provisioning" title="Link to this heading"></a></h1>
+<p>This guide walks you through bringing a PHYTEC development kit onto the phyHUB
+platform for the first time. It has two parts: In <strong>Part A</strong> you install the
+phyHUB client on the internal e.MMC storage of your kit, and in <strong>Part B</strong> you
+activate the device on the platform using its claiming token. The whole process
+takes about 20 to 30 minutes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This token-based flow is intended for evaluation and demonstration purposes.
+For production, PHYTEC provides professional, automated solutions for
+onboarding devices at scale.</p>
+</div>
+<section id="before-you-begin">
+<span id="provisioning-begin"></span><h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Link to this heading"></a></h2>
+<p>This manual is <strong>Step 2</strong> of the onboarding path described in
+<a class="reference internal" href="getting-started.html"><span class="doc">Getting Started with phyHUB</span></a>. Make sure the following prerequisites are met:</p>
+<ol class="arabic simple">
+<li><p><strong>A phyHUB account.</strong> If you do not have one yet, complete the
+<a class="reference internal" href="user-management.html"><span class="doc">User Management</span></a> first. To activate devices, your account needs one of
+the following roles: <strong>Device Manager</strong>, <strong>Device Admin</strong>, <strong>Software
+Developer</strong>, <strong>Software Manager</strong>, or <strong>Software Admin</strong> (see the <strong>Role
+Reference</strong>).</p></li>
+<li><p><strong>A supported PHYTEC development kit</strong> including the SD card that ships with
+it. The SD card holds a ready-to-boot PHYTEC demo image that you will use in
+<a class="reference internal" href="#provisioning-install-client"><span class="std std-ref">Part A: Install the phyHUB Client on Your Development Kit</span></a>.</p></li>
+<li><p><strong>Console access to your board.</strong> We assume you already know how to reach the
+serial console of your board. If not, please refer to the Quick Start Guide
+included with your kit before continuing. This guide uses <strong>SSH</strong> in
+<a class="reference internal" href="#provisioning-install-client"><span class="std std-ref">Part A: Install the phyHUB Client on Your Development Kit</span></a> and the <strong>UART console</strong> via the debug USB
+port of the board in <a class="reference internal" href="#provisioning-activate-device"><span class="std std-ref">Part B: Activate the Device on the Platform</span></a> (115200 baud, 8N1).</p></li>
+<li><p><strong>A computer</strong> with a web browser, an SSH client (Linux and macOS:
+any terminal; Windows: <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> or WSL) and a serial terminal
+program (for example PuTTY on Windows, or <code class="docutils literal notranslate"><span class="pre">tio</span></code>/<code class="docutils literal notranslate"><span class="pre">screen</span></code>/<code class="docutils literal notranslate"><span class="pre">minicom</span></code>
+on Linux and macOS).</p></li>
+<li><p><strong>Internet access for the board</strong>, needed from
+<a class="reference internal" href="#provisioning-activate-device"><span class="std std-ref">Part B: Activate the Device on the Platform</span></a> on. The network setup for both parts is
+described in the next section.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A note on naming The device console output refers to the
+<strong>L-IoT Appstore</strong>. L-IoT is the technology platform that phyHUB is
+built on (“phyHUB, powered by L-IoT”). Wherever the console mentions
+the L-IoT Appstore, enter the token in phyHUB as described in this
+guide.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How to read the commands in this guide Commands prefixed with
+<code class="docutils literal notranslate"><span class="pre">host:~$</span></code> are run on your computer. Commands prefixed with
+<code class="docutils literal notranslate"><span class="pre">target:~$</span></code> are run on the console of the board. Copy only the part
+after the prefix.</p>
+</div>
+<section id="network-setup">
+<span id="provisioning-network-setup"></span><h3>Network Setup<a class="headerlink" href="#network-setup" title="Link to this heading"></a></h3>
+<p>The two parts of this guide have different network requirements.</p>
+<p><strong>Part A: a link between your computer and the board.</strong> While the kit runs the
+PHYTEC demo image from the SD card, it only needs to be reachable from your
+computer; internet access is not required. The demo image uses the static IP
+address <code class="docutils literal notranslate"><span class="pre">192.168.3.11</span></code> on the first Ethernet port. Connect the board to your
+computer with a LAN cable (directly or through the same switch) and give your
+computer an address in the same subnet, for example <code class="docutils literal notranslate"><span class="pre">192.168.3.10</span></code> with
+netmask <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code>. If you cannot change your computer’s network
+settings, use the UART and USB stick alternative described in Part A instead.</p>
+<p><strong>Part B: internet access and a console.</strong> Once the board runs the phyHUB image
+from the e.MMC, you need two connections at the same time: a LAN cable to a
+network with internet access, so that the phyHUB client can reach the platform,
+and a console to read the claiming token and, if necessary, adjust the network
+settings. For the console we recommend the <strong>UART connection</strong> via the debug USB
+port, because the IP address the board receives in your network is not known in
+advance. SSH works as well once you know that address.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="part-a-install-the-phyhub-client-on-your-development-kit">
+<span id="provisioning-install-client"></span><h2>Part A: Install the phyHUB Client on Your Development Kit<a class="headerlink" href="#part-a-install-the-phyhub-client-on-your-development-kit" title="Link to this heading"></a></h2>
+<p>We have prepared ready-made phyHUB images for three platforms. Each image
+contains the complete operating system including the phyHUB client.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Image download</p></th>
+<th class="head"><p>PHYTEC BSP manual</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>phyBOARD-Pollux i.MX 8M Plus</p></td>
+<td><p><a class="reference external" href="https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX8MP-v1.0/">https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX8MP-v1.0/</a></p></td>
+<td><p><a class="reference external" href="https://phytec.github.io/doc-bsp-yocto/bsp/imx8/imx8mp">https://phytec.github.io/doc-bsp-yocto/bsp/imx8/imx8mp</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>phyBOARD-Nash i.MX 93</p></td>
+<td><p><a class="reference external" href="https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX93-v1.0/">https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX93-v1.0/</a></p></td>
+<td><p><a class="reference external" href="https://phytec.github.io/doc-bsp-yocto/bsp/imx9/imx91-93">https://phytec.github.io/doc-bsp-yocto/bsp/imx9/imx91-93</a></p></td>
+</tr>
+<tr class="row-even"><td><p>phyGATE-Tauri-L i.MX 8M Mini</p></td>
+<td><p><a class="reference external" href="https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX8MP-v1.0/">https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/BSP-Yocto-phyHUB-i.MX8MP-v1.0/</a></p></td>
+<td><p><a class="reference external" href="https://www.phytec.de/cdocuments/?doc=doD0F">https://www.phytec.de/cdocuments/?doc=doD0F</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>Your kit is designed to run from its internal <strong>e.MMC</strong> storage, so this is
+where the phyHUB image needs to end up. Out of the box, the e.MMC only contains a
+bootloader, while the SD card that ships with the kit holds a ready-to-boot
+PHYTEC demo image. You will use exactly this SD card system as a helper: boot
+the kit from the SD card as described in its Quick Start Guide, stream the
+phyHUB image from your computer onto the e.MMC, and finally switch the board
+over to booting from the e.MMC.</p>
+<p>Throughout Part A you will use the <strong>boot switch</strong> of your board to select
+between SD card and e.MMC, and you will need the device name of the e.MMC:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Boot switch</p></th>
+<th class="head"><p>SD card position</p></th>
+<th class="head"><p>e.MMC position</p></th>
+<th class="head"><p>e.MMC device</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>phyBOARD-Pollux i.MX 8M Plus</p></td>
+<td><p>S3 (4-pole DIP switch)</p></td>
+<td><p>1 = ON, 2–4 = OFF</p></td>
+<td><p>all OFF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/dev/mmcblk2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>phyBOARD-Nash</p></td>
+<td><p>S3 (4-pole DIP switch)</p></td>
+<td><p>1–2 = ON, 3–4 = OFF</p></td>
+<td><p>2 = ON, others OFF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/dev/mmcblk0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>phyGATE-Tauri-L i.MX 8M Mini</p></td>
+<td><p>1-pole DIP switch (red, reachable through the venting slots of the
+housing</p></td>
+<td><p>ON</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/dev/mmcblk2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The switch positions are also pictured in the Quick Start Guide of your kit.
+You can additionally verify the e.MMC device name on the running board: the
+e.MMC is the MMC device that has <code class="docutils literal notranslate"><span class="pre">boot0</span></code> and <code class="docutils literal notranslate"><span class="pre">boot1</span></code> entries next to it
+(see Step 3).</p>
+</div>
+<section id="step-1-download-the-image-for-your-board">
+<h3>Step 1: Download the Image for Your Board<a class="headerlink" href="#step-1-download-the-image-for-your-board" title="Link to this heading"></a></h3>
+<p>Download the <code class="docutils literal notranslate"><span class="pre">.partup</span></code> image that matches your development kit from the table
+above and save it on your computer.</p>
+</section>
+<section id="step-2-boot-the-kit-from-its-sd-card">
+<h3>Step 2: Boot the Kit from Its SD Card<a class="headerlink" href="#step-2-boot-the-kit-from-its-sd-card" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Set the boot switch of your board to the <strong>SD card</strong> position (see
+the table above).</p></li>
+<li><p>Insert the SD card that ships with your kit.</p></li>
+<li><p>Connect the board to your computer with a LAN cable and make sure
+your computer has an address in the <code class="docutils literal notranslate"><span class="pre">192.168.3.x</span></code> subnet (see
+[[#Network Setup]]).</p></li>
+<li><p>Power on the board and wait about a minute for it to boot.</p></li>
+<li><p>Connect to the board via SSH:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">host:~$ </span>ssh<span class="w"> </span>root@192.168.3.11
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The board now runs the PHYTEC demo image from the SD card. You do not need to
+interact with it otherwise; it is only used to write the e.MMC in the next step.</p>
+</section>
+<section id="step-3-write-the-image-to-the-e-mmc">
+<h3>Step 3: Write the Image to the e.MMC<a class="headerlink" href="#step-3-write-the-image-to-the-e-mmc" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>In your SSH session, confirm the device name of the e.MMC. The e.MMC is the
+MMC device that has <code class="docutils literal notranslate"><span class="pre">boot0</span></code> and <code class="docutils literal notranslate"><span class="pre">boot1</span></code> entries. On the phyBOARD-Pollux,
+for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">target:~$ </span>ls<span class="w"> </span>/dev<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mmcblk
+<span class="go">mmcblk1</span>
+<span class="go">mmcblk1p1</span>
+<span class="go">mmcblk1p2</span>
+<span class="go">mmcblk2</span>
+<span class="go">mmcblk2boot0</span>
+<span class="go">mmcblk2boot1</span>
+<span class="go">mmcblk2rpmb</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">mmcblk2</span></code> is the e.MMC and <code class="docutils literal notranslate"><span class="pre">mmcblk1</span></code> is the SD card you are
+currently booted from. Leave the SSH session with <code class="docutils literal notranslate"><span class="pre">exit</span></code>.</p>
+</li>
+<li><p>From your computer, stream the image over SSH directly onto the e.MMC.
+Replace <code class="docutils literal notranslate"><span class="pre">&lt;image-file&gt;</span></code> with the decompressed image from Step 1 and the
+device name with the one you confirmed above. The example uses the
+phyBOARD-Pollux:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>host:~$ ssh root@192.168.3.11 "dd of=/dev/mmcblk2 bs=1M conv=fsync" &lt; &lt;image-file&gt;
+</pre></div>
+</div>
+<p>On Windows, run this command in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> or WSL; PowerShell does not
+support the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> redirection. Writing takes a few minutes and produces no
+output until it is finished. Wait until the command returns to the prompt.</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">dd</span></code> overwrites the target device without asking. Make sure <code class="docutils literal notranslate"><span class="pre">of=</span></code> points
+to the e.MMC and not to your SD card.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Alternative: UART console and USB stick If you cannot or do not want to use
+the network in Part A, you can write the image from a USB stick instead:</p>
+<ol class="arabic">
+<li><p>Copy the decompressed image to a USB stick formatted with FAT32. Note that
+FAT32 cannot store files larger than 4 GB.</p></li>
+<li><p>Instead of SSH, open the UART console of the board in your serial terminal
+program (see [[#Before You Begin]]) and log in as <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p></li>
+<li><p>Plug the USB stick into the board and write the image from there:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">target:~$ </span>mount<span class="w"> </span>/dev/sda1<span class="w"> </span>/mnt
+<span class="gp">target:~$ </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/mnt/&lt;image-file&gt;<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/mmcblk2<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">conv</span><span class="o">=</span>fsync<span class="w"> </span><span class="nv">status</span><span class="o">=</span>progress
+</pre></div>
+</div>
+</li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">mount</span></code> fails, check which device the stick received with <code class="docutils literal notranslate"><span class="pre">ls</span>
+<span class="pre">/dev/sd*</span></code> and adjust the command. Remove the stick together with the SD card
+in Step 4.</p>
+</div>
+</section>
+<section id="step-4-switch-to-the-e-mmc-and-boot">
+<h3>Step 4: Switch to the e.MMC and Boot<a class="headerlink" href="#step-4-switch-to-the-e-mmc-and-boot" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Shut the board down and disconnect the power:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>host:~$ ssh root@192.168.3.11 poweroff
+</pre></div>
+</div>
+</li>
+<li><p><strong>Remove the SD card</strong>, so that the board can only boot from the e.MMC. Keep
+it in a safe place; you can use it again at any time to repeat Part A.</p></li>
+<li><p>Set the boot switch to the <strong>e.MMC</strong> position (see the table above).</p></li>
+<li><p>Connect your computer to the debug USB port of the board and open the UART
+console in your serial terminal program. This is where you will read the
+claiming token in Part B.</p></li>
+<li><p>Connect the board to a network with internet access using the LAN cable (see
+[[#Network Setup]]). If your computer was connected directly to the board so
+far, plug the board into your network now; the console connection over USB is
+not affected by this.</p></li>
+<li><p>Reconnect the power. The board now boots the phyHUB image from the e.MMC and
+runs a one-time setup process automatically. This may take a minute or two.
+You can follow the boot output on the serial console.</p></li>
+</ol>
+<p>Once the setup completes, the phyHUB client is installed. Continue with Part B.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="part-b-activate-the-device-on-the-platform">
+<span id="provisioning-activate-device"></span><h2>Part B: Activate the Device on the Platform<a class="headerlink" href="#part-b-activate-the-device-on-the-platform" title="Link to this heading"></a></h2>
+<section id="step-1-find-your-claiming-token">
+<h3>Step 1: Find Your Claiming Token<a class="headerlink" href="#step-1-find-your-claiming-token" title="Link to this heading"></a></h3>
+<p>Once the device has finished its initial setup, a <strong>claiming token</strong> appears on
+the serial console. It looks like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[   24.786848] liot-provisioning[709]: +--------------------------------------+
+[   24.789900] liot-provisioning[709]: |    Enter this token in the L-IoT     |
+[   24.791107] liot-provisioning[709]: |     Appstore to bind this device     |
+[   24.792463] liot-provisioning[709]: |           to your account:           |
+[   24.794724] liot-provisioning[709]: |                                      |
+[   24.795887] liot-provisioning[709]: |            PZPS-276Z-3A4E            |
+[   24.798715] liot-provisioning[709]: |                                      |
+[   24.800802] liot-provisioning[709]: +--------------------------------------+
+</pre></div>
+</div>
+<p><strong>Write down or copy your token.</strong> You will need to enter it in phyHUB in the
+next steps.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If the token has scrolled off your console, or if you are connected via SSH
+and therefore do not see the boot output, you can display it at any time on
+the console of the board:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">target:~$ </span>cat<span class="w"> </span>/var/lib/snapd/claiming-token
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you power-cycle your device before completing activation, the same token
+will be shown again when it boots. You do not need to start over.</p>
+</div>
+</section>
+<section id="step-2-log-in-to-phyhub">
+<h3>Step 2: Log In to phyHUB<a class="headerlink" href="#step-2-log-in-to-phyhub" title="Link to this heading"></a></h3>
+<p>Open phyHUB in your web browser and sign in with your account.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you cannot see the <strong>Devices</strong> section after logging in, your account is
+missing one of the roles listed under <a class="reference internal" href="#provisioning-begin"><span class="std std-ref">Before You Begin</span></a>. Ask your
+Organization Admin to assign it.</p>
+</div>
+</section>
+<section id="step-3-enter-your-claiming-token">
+<span id="provisioning-enter-claiming-token"></span><h3>Step 3: Enter Your Claiming Token<a class="headerlink" href="#step-3-enter-your-claiming-token" title="Link to this heading"></a></h3>
+<p>In phyHUB, navigate to the <strong>Devices</strong> section, click <strong>Activate Device</strong>, enter
+the token from Step 1, and click <strong>Save</strong>.</p>
+<p>Once you submit the token, phyHUB will link your device to your account. This
+activation step is the same one described in Part 1 of the <a class="reference internal" href="ui.html"><span class="doc">UI Manual: Devices, Software &amp; Assets</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Alternative You can also claim the token from the terminal with <code class="docutils literal notranslate"><span class="pre">m2cp</span> <span class="pre">device</span>
+<span class="pre">claim</span> <span class="pre">&lt;token&gt;</span></code>. See Part 1 of the <a class="reference internal" href="cli.html"><span class="doc">phyHUB CLI Manual: Devices &amp; Software</span></a>.</p>
+</div>
+<p>The device must finish registering within the next <strong>3 hours</strong>. If you run out
+of time, see <a class="reference internal" href="#provisioning-troubleshooting"><span class="std std-ref">Troubleshooting</span></a> below.</p>
+</section>
+<section id="step-4-wait-for-your-device-to-register">
+<h3>Step 4: Wait for Your Device to Register<a class="headerlink" href="#step-4-wait-for-your-device-to-register" title="Link to this heading"></a></h3>
+<p>Your device checks in with the platform automatically in the background
+(approximately once per minute). Once it detects that you have entered the
+token, it will complete registration on its own.</p>
+<p>You do not need to do anything during this step. Just keep the device powered on
+and connected to the internet.</p>
+</section>
+<section id="step-5-confirm-activation">
+<h3>Step 5: Confirm Activation<a class="headerlink" href="#step-5-confirm-activation" title="Link to this heading"></a></h3>
+<p>When registration is complete, a confirmation message appears on the
+serial console:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==========================================
+
+  Device registered successfully.
+
+  OS Serial: 550e8400-e29b-41d4-a716-446655440000
+
+==========================================
+</pre></div>
+</div>
+<p>If you are connected via SSH instead, check the <strong>Devices</strong> list in phyHUB: your
+device appears there as soon as registration is complete.</p>
+<p>Your <strong>OS Serial</strong> is the unique identifier for your device in phyHUB. Make a
+note of it for your records.</p>
+<p>Your device is now fully activated and ready to use.</p>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>Your device now appears in the <strong>Devices</strong> list of the platform. Continue with
+<strong>Step 3</strong> of <a class="reference internal" href="getting-started.html"><span class="doc">Getting Started with phyHUB</span></a>:</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="ui.html"><span class="doc">UI Manual: Devices, Software &amp; Assets</span></a> shows you how to add the device to a deployment group, install
+software on it, and link it to your physical equipment.</p></li>
+<li><p>If you prefer working from the terminal, the <a class="reference internal" href="cli.html"><span class="doc">phyHUB CLI Manual: Devices &amp; Software</span></a> covers the same
+onboarding flow with the <code class="docutils literal notranslate"><span class="pre">m2cp</span></code> client.</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<span id="provisioning-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="the-token-expired-before-registration-completed">
+<h3>The token expired before registration completed<a class="headerlink" href="#the-token-expired-before-registration-completed" title="Link to this heading"></a></h3>
+<p>The 3-hour window starts the moment you enter the token in phyHUB. If
+registration did not complete in time, the device will automatically generate a
+new token and display it on the serial console. Simply go back to
+<a class="reference internal" href="#provisioning-enter-claiming-token"><span class="std std-ref">Step 3: Enter Your Claiming Token</span></a> and enter the new token.</p>
+</section>
+<section id="the-device-does-not-show-a-token">
+<h3>The device does not show a token<a class="headerlink" href="#the-device-does-not-show-a-token" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Display the token directly on the console:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">target:~$ </span>cat<span class="w"> </span>/var/lib/snapd/claiming-token
+</pre></div>
+</div>
+</li>
+<li><p>Make sure the device has fully finished booting and completed its one-time
+setup.</p></li>
+<li><p>Make sure the board has an active internet connection (see
+<a class="reference internal" href="#provisioning-network-setup"><span class="std std-ref">Network Setup</span></a>).</p></li>
+<li><p>Try power-cycling the device.</p></li>
+</ul>
+</section>
+<section id="you-cannot-reach-the-board-via-ssh-in-part-a">
+<h3>You cannot reach the board via SSH in Part A<a class="headerlink" href="#you-cannot-reach-the-board-via-ssh-in-part-a" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check that your computer has an address in the <code class="docutils literal notranslate"><span class="pre">192.168.3.x</span></code> subnet
+and that the LAN cable is connected to the first Ethernet port of the
+board (see <a class="reference internal" href="#provisioning-network-setup"><span class="std std-ref">Network Setup</span></a>).</p></li>
+<li><p>Alternatively, use the UART console and USB stick as described in Part
+A, Step 3.</p></li>
+</ul>
+</section>
+<section id="the-board-still-shows-the-phytec-demo-system-or-does-not-boot-after-switching-to-the-e-mmc">
+<h3>The board still shows the PHYTEC demo system or does not boot after switching to the e.MMC<a class="headerlink" href="#the-board-still-shows-the-phytec-demo-system-or-does-not-boot-after-switching-to-the-e-mmc" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check that the boot switch is in the <strong>e.MMC</strong> position for your board (see
+the table in <a class="reference internal" href="#provisioning-install-client"><span class="std std-ref">Part A: Install the phyHUB Client on Your Development Kit</span></a>) and that the SD card is
+removed.</p></li>
+<li><p>Make sure the <code class="docutils literal notranslate"><span class="pre">dd</span></code> command in Part A, Step 3 completed without an error
+message. If you are unsure, boot from the SD card again and repeat Step 3.</p></li>
+</ul>
+</section>
+<section id="phyhub-says-the-token-is-invalid">
+<h3>phyHUB says the token is invalid<a class="headerlink" href="#phyhub-says-the-token-is-invalid" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check that you typed the token exactly as shown, including any hyphens.</p></li>
+<li><p>The token may have already been used or may have expired. An expired token is
+replaced by a new one automatically (see the first entry above); use the new
+token.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user-management.html" class="btn btn-neutral float-left" title="User Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ui.html" class="btn btn-neutral float-right" title="UI Manual: Devices, Software &amp; Assets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, PHYTEC Messtechnik GmbH.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    Languages
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+    <dl>
+      <dt>Languages</dt>
+        
+          <dd><a href="https://phytec.github.io/doc-phyhub/index.html">en</a></dd>
+        
+    </dl>
+    
+
+    <div style="margin: 10px 0;"></div>
+    <dl>
+      <dt>Version</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
