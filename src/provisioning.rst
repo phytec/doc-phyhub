@@ -149,13 +149,8 @@ between SD card and e.MMC, and you will need the device name of the e.MMC:
 Step 1: Download the Image for Your Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the image that matches your development kit from the table above and
-save it on your computer. Download only the image file itself; you do not need
-any ``.bmap`` or ``.partup`` files that may be offered alongside it.
-
-If the image file is compressed (its name ends with ``.xz``), decompress it on
-your computer before you continue, for example with ``unxz`` on Linux and macOS
-or with 7-Zip on Windows.
+Download the ``.partup`` image that matches your development kit from the table
+above and save it on your computer.
 
 Step 2: Boot the Kit from Its SD Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
