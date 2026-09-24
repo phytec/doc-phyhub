@@ -33,23 +33,25 @@ This manual is **Step 2** of the onboarding path described in
    included with your kit before continuing. This guide uses **SSH** in
    :ref:`provisioning-install-client` and the **UART console** via the debug USB
    port of the board in :ref:`provisioning-activate-device` (115200 baud, 8N1).
-4. **A computer** with a web browser, an SSH client (Linux and macOS:
-   any terminal; Windows: ``cmd.exe`` or WSL) and a serial terminal
-   program (for example PuTTY on Windows, or ``tio``/``screen``/``minicom``
-   on Linux and macOS).
+4. **A computer** with a web browser, an SSH client including ``scp`` (part of
+   Linux, macOS and Windows 10 or newer) and a serial terminal program (for
+   example PuTTY on Windows, or ``tio``/``screen``/``minicom`` on Linux and
+   macOS).
 5. **Internet access for the board**, needed from
    :ref:`provisioning-activate-device` on. The network setup for both parts is
    described in the next section.
 
-.. note::
-   A note on naming The device console output refers to the
+.. admonition:: A note on naming
+
+   The device console output refers to the
    **L-IoT Appstore**. L-IoT is the technology platform that phyHUB is
    built on ("phyHUB, powered by L-IoT"). Wherever the console mentions
    the L-IoT Appstore, enter the token in phyHUB as described in this
    guide.
 
-.. note::
-   How to read the commands in this guide Commands prefixed with
+.. admonition:: How to read the commands in this guide
+
+   Commands prefixed with
    ``host:~$`` are run on your computer. Commands prefixed with
    ``target:~$`` are run on the console of the board. Copy only the part
    after the prefix.
@@ -108,9 +110,9 @@ Your kit is designed to run from its internal **e.MMC** storage, so this is
 where the phyHUB image needs to end up. Out of the box, the e.MMC only contains a
 bootloader, while the SD card that ships with the kit holds a ready-to-boot
 PHYTEC demo image. You will use exactly this SD card system as a helper: boot
-the kit from the SD card as described in its Quick Start Guide, stream the
-phyHUB image from your computer onto the e.MMC, and finally switch the board
-over to booting from the e.MMC.
+the kit from the SD card as described in its Quick Start Guide, copy the phyHUB
+partup package to the board, install it on the e.MMC with ``partup``, and
+finally switch the board over to booting from the e.MMC.
 
 Throughout Part A you will use the **boot switch** of your board to select
 between SD card and e.MMC, and you will need the device name of the e.MMC:
@@ -135,7 +137,7 @@ between SD card and e.MMC, and you will need the device name of the e.MMC:
       -  ``/dev/mmcblk0``
    *  -  phyGATE-Tauri-L i.MX 8M Mini
       -  1-pole DIP switch (red, reachable through the venting slots of the
-         housing
+         housing)
       -  ON
       -  1
       -  ``/dev/mmcblk2``
@@ -149,8 +151,16 @@ between SD card and e.MMC, and you will need the device name of the e.MMC:
 Step 1: Download the Image for Your Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the ``.partup`` image that matches your development kit from the table
-above and save it on your computer.
+Open the download link for your board from the table above. In that directory,
+navigate to ``images/ampliphy-vendor-rauc/`` and then into the folder named
+after your board. Download the file ending in ``.partup`` and save it on your
+computer. For the phyBOARD-Pollux, for example:
+
+.. code-block:: none
+
+   images/ampliphy-vendor-rauc/phyboard-pollux-imx8mp-3/phytec-liot-image-phyboard-pollux-imx8mp-3.rootfs.partup
+
+You do not need any of the other files in that folder.
 
 Step 2: Boot the Kit from Its SD Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -162,28 +172,36 @@ Step 2: Boot the Kit from Its SD Card
 
 #. Connect the board to your computer with a LAN cable and make sure
    your computer has an address in the ``192.168.3.x`` subnet (see
-   [[#Network Setup]]).
+   :ref:`provisioning-network-setup`).
 
 #. Power on the board and wait about a minute for it to boot.
 
-#. Connect to the board via SSH:
+#. Connect to the board via SSH. The first command removes any host key that a
+   previous board or image left behind for this address; without it, SSH
+   refuses the connection with a ``REMOTE HOST IDENTIFICATION HAS CHANGED``
+   warning:
 
    .. code-block:: console
 
+      host:~$ ssh-keygen -R 192.168.3.11
       host:~$ ssh root@192.168.3.11
 
 The board now runs the PHYTEC demo image from the SD card. You do not need to
 interact with it otherwise; it is only used to write the e.MMC in the next step.
 
-Step 3: Write the Image to the e.MMC
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 3: Install the phyHUB System on the e.MMC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. In your SSH session, confirm the device name of the e.MMC. The e.MMC is the
-   MMC device that has ``boot0`` and ``boot1`` entries. On the phyBOARD-Pollux,
-   for example:
+1. In your SSH session, make sure the board is running from the SD card and
+   confirm the device name of the e.MMC. The root file system must be on the SD
+   card, and the e.MMC is the MMC device that has ``boot0`` and ``boot1``
+   entries. On the phyBOARD-Pollux, for example:
 
    .. code-block:: console
 
+      target:~$ findmnt /
+      TARGET SOURCE         FSTYPE OPTIONS
+      /      /dev/mmcblk1p2 ext4   rw,relatime
       target:~$ ls /dev | grep mmcblk
       mmcblk1
       mmcblk1p1
@@ -193,55 +211,63 @@ Step 3: Write the Image to the e.MMC
       mmcblk2boot1
       mmcblk2rpmb
 
-   Here ``mmcblk2`` is the e.MMC and ``mmcblk1`` is the SD card you are
-   currently booted from. Leave the SSH session with ``exit``.
+   Here ``mmcblk1`` is the SD card you are currently booted from and
+   ``mmcblk2`` is the e.MMC. If ``findmnt`` shows the e.MMC instead, the boot
+   switch is in the wrong position. Leave the SSH session with ``exit``.
 
-2. From your computer, stream the image over SSH directly onto the e.MMC.
-   Replace ``<image-file>`` with the decompressed image from Step 1 and the
-   device name with the one you confirmed above. The example uses the
-   phyBOARD-Pollux:
+2. From your computer, copy the partup package to the board. Replace
+   ``<package>`` with the file you downloaded in Step 1:
 
-   .. code-block::
+   .. code-block:: console
 
-      host:~$ ssh root@192.168.3.11 "dd of=/dev/mmcblk2 bs=1M conv=fsync" < <image-file>
+      host:~$ scp <package>.partup root@192.168.3.11:/tmp/
 
-   On Windows, run this command in ``cmd.exe`` or WSL; PowerShell does not
-   support the ``<`` redirection. Writing takes a few minutes and produces no
-   output until it is finished. Wait until the command returns to the prompt.
+3. Connect to the board again and install the package on the e.MMC. Use the
+   device name you confirmed above; the example uses the phyBOARD-Pollux:
+
+   .. code-block:: console
+
+      host:~$ ssh root@192.168.3.11
+      target:~$ partup install /tmp/<package>.partup /dev/mmcblk2
+
+   ``partup`` reports the stages *Initializing*, *Partitioning* and *Writing
+   data* and returns to the prompt after a few minutes. Make sure it reports no
+   error.
 
 .. warning::
-   ``dd`` overwrites the target device without asking. Make sure ``of=`` points
-   to the e.MMC and not to your SD card.
+   ``partup`` overwrites the target device without asking. Make sure the last
+   argument is the e.MMC and not your SD card.
 
-.. tip::
-   Alternative: UART console and USB stick If you cannot or do not want to use
-   the network in Part A, you can write the image from a USB stick instead:
+.. admonition:: Alternative: UART console and USB stick
+   :class: tip
 
-   1. Copy the decompressed image to a USB stick formatted with FAT32. Note that
-      FAT32 cannot store files larger than 4 GB.
+   If you cannot or do not want to use the network in Part A, you can install
+   the package from a USB stick instead:
+
+   1. Copy the ``.partup`` package to a USB stick formatted with FAT32.
 
    2. Instead of SSH, open the UART console of the board in your serial terminal
-      program (see [[#Before You Begin]]) and log in as ``root``.
+      program (see :ref:`provisioning-begin`) and log in as ``root``.
 
-   3. Plug the USB stick into the board and write the image from there:
+   3. Plug the USB stick into the board and install the package from there:
 
       .. code-block:: console
 
          target:~$ mount /dev/sda1 /mnt
-         target:~$ dd if=/mnt/<image-file> of=/dev/mmcblk2 bs=1M conv=fsync status=progress
+         target:~$ partup install /mnt/<package>.partup /dev/mmcblk2
 
-   If ``mount`` fails, check which device the stick received with ``ls
-   /dev/sd*`` and adjust the command. Remove the stick together with the SD card
-   in Step 4.
+   If ``mount`` fails, check which device the stick received with
+   ``ls /dev/sd*`` and adjust the command. Remove the stick together with the
+   SD card in Step 4.
 
 Step 4: Switch to the e.MMC and Boot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Shut the board down and disconnect the power:
 
-   .. code-block::
+   .. code-block:: console
 
-      host:~$ ssh root@192.168.3.11 poweroff
+      target:~$ poweroff
 
 2. **Remove the SD card**, so that the board can only boot from the e.MMC. Keep
    it in a safe place; you can use it again at any time to repeat Part A.
@@ -253,7 +279,7 @@ Step 4: Switch to the e.MMC and Boot
    claiming token in Part B.
 
 5. Connect the board to a network with internet access using the LAN cable (see
-   [[#Network Setup]]). If your computer was connected directly to the board so
+   :ref:`provisioning-network-setup`). If your computer was connected directly to the board so
    far, plug the board into your network now; the console connection over USB is
    not affected by this.
 
@@ -286,7 +312,8 @@ the serial console. It looks like this::
    [   24.800802] liot-provisioning[709]: +--------------------------------------+
 
 **Write down or copy your token.** You will need to enter it in phyHUB in the
-next steps.
+next steps. The console may also offer to reset the token with ``Alt+R``; this
+does not work in the current image and can be ignored.
 
 .. tip::
    If the token has scrolled off your console, or if you are connected via SSH
@@ -323,9 +350,11 @@ the token from Step 1, and click **Save**.
 Once you submit the token, phyHUB will link your device to your account. This
 activation step is the same one described in Part 1 of the :doc:`/ui`.
 
-.. tip::
-   Alternative You can also claim the token from the terminal with ``m2cp device
-   claim <token>``. See Part 1 of the :doc:`/cli`.
+.. admonition:: Alternative
+   :class: tip
+
+   You can also claim the token from the terminal with
+   ``m2cp device claim <token>``. See Part 1 of the :doc:`/cli`.
 
 The device must finish registering within the next **3 hours**. If you run out
 of time, see :ref:`provisioning-troubleshooting` below.
@@ -354,8 +383,8 @@ serial console::
 
    ==========================================
 
-If you are connected via SSH instead, check the **Devices** list in phyHUB: your
-device appears there as soon as registration is complete.
+If you are connected via SSH instead, check the **Devices** list in phyHUB. It
+can take a moment and a page reload until the device shows up there.
 
 Your **OS Serial** is the unique identifier for your device in phyHUB. Make a
 note of it for your records.
@@ -407,8 +436,18 @@ You cannot reach the board via SSH in Part A
 -  Check that your computer has an address in the ``192.168.3.x`` subnet
    and that the LAN cable is connected to the first Ethernet port of the
    board (see :ref:`provisioning-network-setup`).
+-  If SSH refuses the connection with ``REMOTE HOST IDENTIFICATION HAS
+   CHANGED``, run ``ssh-keygen -R 192.168.3.11`` on your computer and connect
+   again.
 -  Alternatively, use the UART console and USB stick as described in Part
    A, Step 3.
+
+``partup`` reports that the device is in use
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The message ``Device '/dev/mmcblk2' is in use`` means the board is running from
+the e.MMC, not from the SD card. Power off, set the boot switch to the SD card
+position, and start again at Part A, Step 2.
 
 The board still shows the PHYTEC demo system or does not boot after switching to the e.MMC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -416,8 +455,20 @@ The board still shows the PHYTEC demo system or does not boot after switching to
 -  Check that the boot switch is in the **e.MMC** position for your board (see
    the table in :ref:`provisioning-install-client`) and that the SD card is
    removed.
--  Make sure the ``dd`` command in Part A, Step 3 completed without an error
-   message. If you are unsure, boot from the SD card again and repeat Step 3.
+-  Make sure the ``partup install`` command in Part A, Step 3 completed without
+   an error message. If you are unsure, boot from the SD card again and repeat
+   Step 3.
+
+The console says "Device registered" but the device is not in the Devices list
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The console message is the authoritative confirmation that registration
+succeeded. If the device is missing in phyHUB:
+
+-  Reload the page and reset any filters on the Devices list.
+-  Make sure you are logged in to the organization in which you activated the
+   token.
+-  Search for the OS Serial shown on the console.
 
 phyHUB says the token is invalid
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
