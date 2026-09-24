@@ -151,8 +151,16 @@ between SD card and e.MMC, and you will need the device name of the e.MMC:
 Step 1: Download the Image for Your Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download the ``.partup`` image that matches your development kit from the table
-above and save it on your computer.
+Open the download link for your board from the table above. In that directory,
+navigate to ``images/ampliphy-vendor-rauc/`` and then into the folder named
+after your board. Download the file ending in ``.partup`` and save it on your
+computer. For the phyBOARD-Pollux, for example:
+
+.. code-block:: none
+
+   images/ampliphy-vendor-rauc/phyboard-pollux-imx8mp-3/phytec-liot-image-phyboard-pollux-imx8mp-3.rootfs.partup
+
+You do not need any of the other files in that folder.
 
 Step 2: Boot the Kit from Its SD Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
