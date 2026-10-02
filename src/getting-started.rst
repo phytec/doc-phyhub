@@ -97,9 +97,11 @@ platform. Among other things, you will learn how to:
 Step 4: Automate and Publish with the CLI
 -----------------------------------------
 
-The :doc:`/cli` documents ``m2cp``, the phyHUB command-line client. It covers
-the platform’s device and software management from the terminal and adds
-developer capabilities that are not available in the UI:
+For this step you install ``m2cp``, the phyHUB command-line client, on your
+computer (see :ref:`getting-started-links`). The :doc:`/cli` explains the
+installation and documents all commands. ``m2cp`` covers the platform’s device
+and software management from the terminal and adds developer capabilities that
+are not available in the UI:
 
 -  Upload new software, both applications and complete OS images, which then
    becomes available for deployment on the online platform
@@ -124,6 +126,28 @@ Order      Document                 Purpose
 ---------- ------------------------ --------------------------------------------
 4          :doc:`/cli`              The ``m2cp`` command-line client
 ========== ======================== ============================================
+
+.. _getting-started-links:
+
+Links and Tools
+---------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   *  -  Link
+      -  Purpose
+   *  -  `Register your organization <https://www.phyhub.phytec.de/auth/register-organization>`__
+      -  Create your own phyHUB tenant. See :doc:`/user-management`.
+   *  -  `phyHUB BSP images <https://download.phytec.de/Software/Linux/BSP-Yocto-phyHUB/>`__
+      -  Prebuilt phyHUB images for the supported PHYTEC development kits. See
+         :doc:`/provisioning`.
+   *  -  `m2cp command-line client <https://download.phytec.de/Products/phyHUB/m2cp/>`__
+      -  Install this on your computer to upload new software to phyHUB,
+         generate device seeds and more. See :doc:`/cli`.
+   *  -  `meta-liot Yocto layer <https://github.com/phytec/meta-liot>`__
+      -  Yocto layer for building your own phyHUB-enabled images.
 
 If you have questions at any point during your evaluation, contact the phyHUB
 team at PHYTEC. We are happy to help.

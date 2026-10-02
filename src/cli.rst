@@ -100,8 +100,17 @@ Before You Begin
 Install and authenticate
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-``m2cp`` is delivered as a Debian package. Install it, then log in against your
-store's GraphQL endpoint:
+``m2cp`` is delivered as a Debian package for amd64, available from
+https://download.phytec.de/Products/phyHUB/m2cp/. On Debian or Ubuntu
+(including WSL on Windows), install it with:
+
+.. code:: console
+
+   host:~$ wget https://download.phytec.de/Products/phyHUB/m2cp/mlpa-m2cp-cli_amd64.deb
+   host:~$ sudo apt install ./mlpa-m2cp-cli_amd64.deb
+   host:~$ m2cp version
+
+Then log in against your store's GraphQL endpoint:
 
 .. code:: console
 
