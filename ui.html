@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Manual: Devices, Software &amp; Assets &mdash; PHYTEC phyHUB Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e72c8e07" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/phytec-theme.css?v=6bd448f6" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://phytec.github.io/doc-phyhub/ui.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="phyHUB CLI Manual: Devices &amp; Software" href="cli.html" />
+    <link rel="prev" title="Device Provisioning" href="provisioning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHYTEC phyHUB Documentation
+              <img src="_static/logo-phytec.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started with phyHUB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-management.html">User Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provisioning.html">Device Provisioning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UI Manual: Devices, Software &amp; Assets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-everything-connects-the-big-picture">How Everything Connects — The Big Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-1-onboarding-your-devices">Part 1: Onboarding Your Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-device-list">The Device List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registering-a-new-device">Registering a New Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-device-details-page">The Device Details Page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-2-uploading-applications-to-the-store">Part 2: Uploading Applications to the Store</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-the-app-approval-process-works">How the App Approval Process Works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reviewing-and-rating-apps-software-manager">Reviewing and Rating Apps (Software Manager)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-3-creating-deployment-groups">Part 3: Creating Deployment Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-group">Creating a New Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-apps-to-the-group">Adding Apps to the Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-devices-to-the-group">Adding Devices to the Group</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-4-setting-up-your-asset-hierarchy">Part 4: Setting Up Your Asset Hierarchy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-an-asset-type">Step 1: Create an Asset Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-create-an-asset-model">Step 2: Create an Asset Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-create-an-asset-instance">Step 3: Create an Asset Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-commission-a-device-link-device-to-asset">Step 4: Commission a Device (Link Device to Asset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-5-attribute-sets">Part 5: Attribute Sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-an-attribute-set">What Is an Attribute Set?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-attribute-set">Creating an Attribute Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attaching-an-attribute-set-to-an-asset-model">Attaching an Attribute Set to an Asset Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#putting-it-all-together-a-typical-setup-workflow">Putting It All Together – A Typical Setup Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">phyHUB CLI Manual: Devices &amp; Software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHYTEC phyHUB Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">UI Manual: Devices, Software &amp; Assets</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/phytec/doc-phyhub/blob/main/source/ui.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ui-manual-devices-software-assets">
+<h1>UI Manual: Devices, Software &amp; Assets<a class="headerlink" href="#ui-manual-devices-software-assets" title="Link to this heading"></a></h1>
+<p>This guide walks you through everything you need to do in the phyHUB web
+interface to get your IoT devices up and running – from registering a device
+for the first time to installing software on it and linking it to a piece of
+physical equipment.</p>
+<hr class="docutils" />
+<section id="how-everything-connects-the-big-picture">
+<h2>How Everything Connects — The Big Picture<a class="headerlink" href="#how-everything-connects-the-big-picture" title="Link to this heading"></a></h2>
+<p>phyHUB manages three things at once: <strong>devices</strong>, <strong>software</strong>, and <strong>physical
+assets</strong>. Before diving into the steps, it helps to understand how these pieces
+relate to each other.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BEFORE THE UI
+────────────────────────────────────────────────────────
+  Physical device  →  Provisioned via terminal
+                       (see Device Provisioning Manual)
+
+IN THE phyHUB UI
+────────────────────────────────────────────────────────
+  Device registered
+       │
+       ├──▶  Added to a Deployment Group
+       │           │
+       │           └──▶  Apps installed automatically
+       │
+       └──▶  Commissioned to an Asset
+                   │
+                   └──▶  Linked to physical equipment
+                          (pump, robot arm, CNC machine…)
+</pre></div>
+</div>
+<p>Here is what each of these concepts means in plain language:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>What it is</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Device</strong></p></td>
+<td><p>A physical edge device (e.g., a
+Raspberry Pi or industrial
+gateway) attached to a piece of
+equipment</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>App / Application</strong></p></td>
+<td><p>Software that runs on a device —
+uploaded to the phyHUB store and
+deployed remotely</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Deployment Group</strong></p></td>
+<td><p>A named group of devices that
+share the same set of apps.
+Assigning a device to a group
+automatically installs the
+group’s apps on it</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Asset</strong></p></td>
+<td><p>A physical piece of industrial
+equipment (pump, motor, conveyor
+belt, etc.) that one or more
+devices are attached to</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Asset Hierarchy</strong></p></td>
+<td><p>A template that describes what
+devices an asset needs and how
+they are organized — defined
+before any real devices are
+assigned</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Commissioning</strong></p></td>
+<td><p>The final step: assigning a
+specific physical device
+(identified by its serial number)
+to a slot in an asset’s hierarchy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Attribute Set</strong></p></td>
+<td><p>A set of custom data fields you
+can attach to an asset type to
+record extra information (e.g.,
+installation date, manufacturer,
+location)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="before-you-begin">
+<h2>Before You Begin:<a class="headerlink" href="#before-you-begin" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>User Management</p>
+<p><strong>This step happens before you open the phyHUB UI.</strong></p>
+<p>Before you can interact with the web UI, you have to first set up and manage
+your team’s access to phyHUB.</p>
+<p>This means creating your organization, inviting colleagues, assigning the
+right roles.</p>
+<p>Please check the <strong>User Management Manual</strong> found in the same folder as this
+guide. Once your organization is fully setup and you have invited all your
+team memebrs, you can proceed with the rest of this manual.</p>
+</li>
+<li><p>Provisioning Your Device</p>
+<p><strong>This step happens before you open the phyHUB UI.</strong></p>
+<p>Every physical device must be provisioned – enrolled with the platform’s
+identity system – before it can be registered through the web interface.
+This involves running a set of commands on the device itself (or during
+manufacturing).</p>
+<p>Full instructions are provided in the <strong>Device Provisioning Manual (using the
+terminal)</strong> found in the same folder as this guide. Complete that process
+first, then return here to continue with the UI steps.</p>
+</li>
+<li><p>The phyHUB web UI</p></li>
+</ol>
+<p>After completing steps 1 and 2, you now have devices that are ready to be
+activated and users that can perform meaningful actions with them in the store.</p>
+<p>Head to <a class="reference external" href="https://www.phyhub.phytec.de/">https://www.phyhub.phytec.de/</a> and begin your journey.</p>
+</section>
+<hr class="docutils" />
+<section id="part-1-onboarding-your-devices">
+<h2>Part 1: Onboarding Your Devices<a class="headerlink" href="#part-1-onboarding-your-devices" title="Link to this heading"></a></h2>
+<p>Once a device has been provisioned, you register it in phyHUB so the platform
+knows it exists and can manage it.</p>
+<section id="the-device-list">
+<h3>The Device List<a class="headerlink" href="#the-device-list" title="Link to this heading"></a></h3>
+<p>Navigate to the <strong>Devices</strong> section in the left sidebar. You will see a table
+listing all registered devices with the following information for each:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>What it shows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Serial Number</strong></p></td>
+<td><p>The unique hardware identifier of
+the device</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Model</strong></p></td>
+<td><p>The device model (e.g., a
+specific type of gateway or
+controller)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Status</strong></p></td>
+<td><p>Whether the device is Active,
+Offline, or Pending activation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Last Seen</strong></p></td>
+<td><p>When the device last communicated
+with the platform</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Deployment Group</strong></p></td>
+<td><p>Which deployment group (if any)
+this device is currently in</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="registering-a-new-device">
+<h3>Registering a New Device<a class="headerlink" href="#registering-a-new-device" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Click the <strong>Activate Device</strong> button at the top of the page.</p></li>
+<li><p>Enter the <strong>device token</strong> you obtained from the device during the terminal
+provisioning step.</p></li>
+<li><p>Click <strong>Save</strong>. The device will appear in the list in a few moments if the
+activation process was successful.</p></li>
+</ol>
+</section>
+<section id="the-device-details-page">
+<h3>The Device Details Page<a class="headerlink" href="#the-device-details-page" title="Link to this heading"></a></h3>
+<p>Click on any device in the list to open its details page. Here you will find
+several tabs:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tab</p></th>
+<th class="head"><p>What it shows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Details</strong></p></td>
+<td><p>Serial number, model, current
+status, and assigned deployment
+group</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Software</strong></p></td>
+<td><p>The current installation state of
+each app on the device</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Logs</strong></p></td>
+<td><p>Live and recent log output from
+the device — useful for
+troubleshooting</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-2-uploading-applications-to-the-store">
+<h2>Part 2: Uploading Applications to the Store<a class="headerlink" href="#part-2-uploading-applications-to-the-store" title="Link to this heading"></a></h2>
+<p>phyHUB works like an app store: developers upload application packages via the
+terminal, a reviewer then rates them through the UI, and once rated the apps
+become available to be assigned to deployment groups and pushed to devices.</p>
+<section id="how-the-app-approval-process-works">
+<h3>How the App Approval Process Works<a class="headerlink" href="#how-the-app-approval-process-works" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>App uploaded via terminal  →  Status: "Unrated"
+                                   │
+                        Software Manager reviews it
+                                   │
+              Approved  ──▶  "Experimental", "Edge", or "Stable"
+                              All three are available in deployment groups
+
+              Rejected  ──▶  "Denied"  (not available for deployment)
+</pre></div>
+</div>
+<p>Apps with a status of <strong>Experimental</strong>, <strong>Edge</strong>, or <strong>Stable</strong> are all visible
+in the deployment group app selector and can be assigned to devices. Apps that
+are <strong>Unrated</strong> or <strong>Denied</strong> cannot be added to any deployment group.</p>
+</section>
+<section id="reviewing-and-rating-apps-software-manager">
+<h3>Reviewing and Rating Apps (Software Manager)<a class="headerlink" href="#reviewing-and-rating-apps-software-manager" title="Link to this heading"></a></h3>
+<p>If your role is <strong>Software Manager</strong> or <strong>Software Admin</strong>, you are responsible
+for reviewing apps uploaded to the store and setting their status. Apps are
+uploaded via the terminal by developers and will initially appear with
+<strong>Unrated</strong> status.</p>
+<ol class="arabic simple">
+<li><p>Open the <strong>Software Review</strong> section, click on the <strong>Apps Pending Review</strong>
+tab and find the app you want to review.</p></li>
+<li><p>Click on the app to open its details.</p></li>
+<li><p>Check the app information and package.</p></li>
+<li><p>Use the <strong>Status</strong> dropdown to change the rating:</p>
+<ul class="simple">
+<li><p><strong>Experimental</strong> → available for deployment; indicates an early-stage or
+developer build</p></li>
+<li><p><strong>Edge</strong> → available for deployment; indicates a field-ready but not fully
+production-validated release</p></li>
+<li><p><strong>Stable</strong> → available for deployment; indicates a fully validated,
+production-ready release</p></li>
+<li><p><strong>Denied</strong> → not available for deployment; the app has been rejected</p></li>
+</ul>
+</li>
+<li><p>Save your changes. The developer will see the updated status on their app.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-3-creating-deployment-groups">
+<h2>Part 3: Creating Deployment Groups<a class="headerlink" href="#part-3-creating-deployment-groups" title="Link to this heading"></a></h2>
+<p>A deployment group is how phyHUB knows which apps to install on which devices.
+Instead of assigning apps to individual devices, you define a group for a
+specific device model and list the apps it should run. Any device added to that
+group will automatically receive those apps.</p>
+<section id="creating-a-new-group">
+<h3>Creating a New Group<a class="headerlink" href="#creating-a-new-group" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Go to the <strong>Devices</strong> section in the left sidebar and then click on the
+<strong>Deploymnet Groups</strong> tab.</p></li>
+<li><p>Click <strong>Create Group</strong>.</p></li>
+<li><p>Enter a <strong>name</strong> for the group (e.g., <code class="docutils literal notranslate"><span class="pre">production-pump-controllers</span></code>).</p></li>
+<li><p>Select the <strong>device model</strong> – only devices of this model type can be added to
+the group.</p></li>
+<li><p>Optionally add a <strong>description</strong>.</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+</section>
+<section id="adding-apps-to-the-group">
+<h3>Adding Apps to the Group<a class="headerlink" href="#adding-apps-to-the-group" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Open the deployment group you just created.</p></li>
+<li><p>Click the <strong>Apps</strong> tab.</p></li>
+<li><p>Click <strong>Add Application</strong>.</p></li>
+<li><p>Select the app and the specific <strong>version</strong> (revision) you want deployed.
+Apps with <strong>Unrated</strong> or <strong>Denied</strong> status do not appear here – only apps
+rated as <strong>Experimental</strong>, <strong>Edge</strong>, or <strong>Stable</strong> are available.</p></li>
+<li><p>Click <strong>Add</strong>. The app is now part of this group’s target configuration.</p></li>
+</ol>
+<p>You can add multiple apps to a single group. All devices in the group
+will receive all the listed apps.</p>
+</section>
+<section id="adding-devices-to-the-group">
+<h3>Adding Devices to the Group<a class="headerlink" href="#adding-devices-to-the-group" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>In the same deployment group, click the <strong>Devices</strong> tab.</p></li>
+<li><p>Click <strong>Add Devices</strong>.</p></li>
+<li><p>Select one or more from the list of available devices matching the group’s
+device model.</p></li>
+<li><p>Click <strong>Add</strong>.</p></li>
+</ol>
+<p>Once a device is added to a group, phyHUB will begin pushing the group’s
+applications to it automatically. You can monitor the installation progress from
+the device’s details page.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A device can only belong to one deployment group at a time. If you need to
+change which apps a device runs, either update the apps in its current group
+or move it to a different group.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-4-setting-up-your-asset-hierarchy">
+<h2>Part 4: Setting Up Your Asset Hierarchy<a class="headerlink" href="#part-4-setting-up-your-asset-hierarchy" title="Link to this heading"></a></h2>
+<p>An <strong>asset</strong> in phyHUB represents a physical piece of industrial equipment – a
+pump, a motor, a robotic arm, a CNC machine. Linking your devices to assets lets
+you see not just <em>which</em> device has a problem, but <em>which piece of equipment</em> it
+belongs to.</p>
+<p>Asset management involves three layers, built in order:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Asset Type   →   Asset Model (with hierarchy)   →   Asset Instance
+  "Pump"           "Model XYZ-500 Pump"              "Pump 001, Hall B"
+                    (defines which devices           (a real machine)
+                     it needs and how they
+                     are organized)
+</pre></div>
+</div>
+<section id="step-1-create-an-asset-type">
+<h3>Step 1: Create an Asset Type<a class="headerlink" href="#step-1-create-an-asset-type" title="Link to this heading"></a></h3>
+<p>An <strong>Asset Type</strong> is the broadest category – it describes a class of equipment,
+not a specific product.</p>
+<ol class="arabic simple">
+<li><p>Go to the <strong>Assets</strong> section and open the <strong>Asset Types</strong> tab.</p></li>
+<li><p>Click <strong>Create Asset Type</strong>.</p></li>
+<li><p>Enter a <strong>name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">Industrial</span> <span class="pre">Pump</span></code>, <code class="docutils literal notranslate"><span class="pre">Conveyor</span> <span class="pre">Belt</span></code>, <code class="docutils literal notranslate"><span class="pre">CNC</span>
+<span class="pre">Machine</span></code>).</p></li>
+<li><p>Optionally add a <strong>description</strong>.</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+<p>You only need to create each type once. All specific models and physical
+instances will be organized under their respective type.</p>
+</section>
+<section id="step-2-create-an-asset-model">
+<h3>Step 2: Create an Asset Model<a class="headerlink" href="#step-2-create-an-asset-model" title="Link to this heading"></a></h3>
+<p>An <strong>Asset Model</strong> is a specific product or configuration within a type. More
+importantly, it is where you define the <strong>device hierarchy</strong>, the template that
+describes which devices this model of equipment needs and how they are
+organized.</p>
+<ol class="arabic simple">
+<li><p>Still in the <strong>Assets</strong> section, click on the <strong>Asset Types</strong> tab and select
+your newly created type.</p></li>
+<li><p>Click <strong>Add Model</strong>.</p></li>
+<li><p>Give it a <strong>name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">XYZ-500</span> <span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">Mark</span> <span class="pre">II</span> <span class="pre">Conveyor</span></code>) and,
+optionally, a <strong>description</strong>.</p></li>
+<li><p>Assign an attribute set to the model (see Part 5 for details about how
+Attribute Sets are created) and click <strong>Next</strong>.</p></li>
+<li><p>Build the model hierarchy by slecting from a list of previously created
+<strong>assets</strong> or <strong>devices</strong> . This is a bluepring describing what components
+your asset model contains.</p></li>
+<li><p>Save the hierarchy when done.</p></li>
+<li><p>Click <strong>Save</strong> to create the model.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Think of the hierarchy as a socket diagram.</strong> It describes the <em>shape</em> of
+the device setup an asset needs – the real devices are plugged in during
+commissioning (Step 4 below).</p>
+</div>
+</section>
+<section id="step-3-create-an-asset-instance">
+<h3>Step 3: Create an Asset Instance<a class="headerlink" href="#step-3-create-an-asset-instance" title="Link to this heading"></a></h3>
+<p>Now you create the actual, physical piece of equipment in the system.</p>
+<ol class="arabic simple">
+<li><p>Go to the main <strong>Assets</strong> list.</p></li>
+<li><p>Click <strong>Add Assets</strong>.</p></li>
+<li><p>Select the <strong>Asset Model</strong> this piece of equipment is based on.</p></li>
+<li><p>Give it a meaningful <strong>name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">Pump-001-HallB</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Robot-Line3-Position2</span></code>).</p></li>
+<li><p>Fill in any other required fields (location, notes, etc.).</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+<p>The asset now exists in phyHUB, but its device slots are empty. The next step
+fills them.</p>
+</section>
+<section id="step-4-commission-a-device-link-device-to-asset">
+<h3>Step 4: Commission a Device (Link Device to Asset)<a class="headerlink" href="#step-4-commission-a-device-link-device-to-asset" title="Link to this heading"></a></h3>
+<p>Commissioning is the act of assigning a specific physical device – identified
+by its serial number – to a slot in an asset’s hierarchy. This is the final
+connection between the digital platform and the real world.</p>
+<ol class="arabic simple">
+<li><p>Open the asset instance you just created from the <strong>Assets</strong> list.</p></li>
+<li><p>Navigate to the <strong>Asset Hierarchy/Commissioning</strong> tab and you will see the
+hierarchy blueprint defined by the model.</p></li>
+<li><p>Click on <strong>Assign</strong> for each hierarchy component to assign a device or asset
+to it.</p></li>
+<li><p>Select the device or asset from the list or search by name/serial number.</p></li>
+<li><p>Confirm the assignment.</p></li>
+<li><p>Repeat for all slots in the hierarchy.</p></li>
+</ol>
+<p>Once commissioned, the asset’s overview will show the live status of each
+connected device, and you can navigate from the asset directly to the device
+details page.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-5-attribute-sets">
+<h2>Part 5: Attribute Sets<a class="headerlink" href="#part-5-attribute-sets" title="Link to this heading"></a></h2>
+<p>Attribute sets let you attach custom data fields to your asset models – things
+like installation date, manufacturer details, maintenance schedule, maximum
+operating temperature, or any other information your team needs to track.</p>
+<section id="what-is-an-attribute-set">
+<h3>What Is an Attribute Set?<a class="headerlink" href="#what-is-an-attribute-set" title="Link to this heading"></a></h3>
+<p>An attribute set is a reusable template of data fields. You create it once and
+then attach it to one or more asset models. Every asset of that model will then
+have those fields available to fill in.</p>
+<p>For example, you might create an attribute set called <code class="docutils literal notranslate"><span class="pre">Pump</span> <span class="pre">Specifications</span></code>
+containing fields like <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Flow</span> <span class="pre">Rate</span></code>, <code class="docutils literal notranslate"><span class="pre">Operating</span> <span class="pre">Pressure</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Installation</span> <span class="pre">Date</span></code>. Attach it to the <code class="docutils literal notranslate"><span class="pre">XYZ-500</span> <span class="pre">Series</span></code> model and every
+XYZ-500 pump in your system will have those fields.</p>
+</section>
+<section id="creating-an-attribute-set">
+<h3>Creating an Attribute Set<a class="headerlink" href="#creating-an-attribute-set" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Go to <strong>Assets</strong> → <strong>Attribute Fields &amp; Sets</strong>.</p></li>
+<li><p>Click <strong>Create Attribute Set</strong> (the “<strong>+</strong>” icon).</p></li>
+<li><p>Give the set a <strong>name</strong> and an optional <strong>description</strong>.</p></li>
+<li><p>After the set is created, select it from the list and click <strong>Add Attribute</strong>
+to add each data field:</p>
+<ul class="simple">
+<li><p><strong>Name</strong> – the label for the field (e.g., <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Flow</span> <span class="pre">Rate</span></code>)</p></li>
+<li><p><strong>Type</strong> – the kind of value this field holds:</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Use it for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>String</strong></p></td>
+<td><p>Text (names, descriptions, codes)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Integer</strong></p></td>
+<td><p>Whole numbers (counts, IDs)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Float</strong></p></td>
+<td><p>Decimal numbers (measurements, temperatures)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Boolean</strong></p></td>
+<td><p>Yes / No values</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Date</strong></p></td>
+<td><p>Calendar dates (installation date, expiry date)</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Add as many attributes as needed, then click <strong>Save</strong>.</p></li>
+</ol>
+</section>
+<section id="attaching-an-attribute-set-to-an-asset-model">
+<h3>Attaching an Attribute Set to an Asset Model<a class="headerlink" href="#attaching-an-attribute-set-to-an-asset-model" title="Link to this heading"></a></h3>
+<p><strong>New model</strong></p>
+<p>When creating a new model you can assign an existing Attribute Set to it duting
+the model creation flow.</p>
+<p><strong>Existing model</strong></p>
+<p>You can edit an existing Asset Model to assign a new Attribute Set or remove an
+existing set.</p>
+<ol class="arabic simple">
+<li><p>Go to <strong>Assets</strong> → <strong>Asset Types</strong>.</p></li>
+<li><p>Find the Asset Type that contains the model you want to edit.</p></li>
+<li><p>Click on the <strong>Models</strong> tab to see all the models created for the selected
+asset type.</p></li>
+<li><p>Click on the asset model you want to edit to go to its details page</p></li>
+<li><p>On the asset model details page click <strong>Manage</strong> and select <strong>Edit</strong></p></li>
+<li><p>You will see the asset model creation form, this time with all the details
+already filled in.</p></li>
+<li><p>All the available attribute sets are listed in the lower half of the page.
+Check the box next to each set you want to add to your model.</p></li>
+<li><p>Click <strong>Next</strong> to confirm no changes need to be done to the hierarchy.</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="putting-it-all-together-a-typical-setup-workflow">
+<h2>Putting It All Together – A Typical Setup Workflow<a class="headerlink" href="#putting-it-all-together-a-typical-setup-workflow" title="Link to this heading"></a></h2>
+<p>Here is the recommended order of operations when setting up phyHUB for the first
+time, or when onboarding a new type of device and equipment:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>What to do</p></th>
+<th class="head"><p>Where</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Provision devices
+physically (run
+terminal commands on
+the hardware)</p></td>
+<td><p>Device terminal</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Create your Asset
+Types</p></td>
+<td><p>phyHUB → Assets →
+Asset Types</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Create your Asset
+Models with device
+hierarchies</p></td>
+<td><p>phyHUB → Assets →
+Asset Models</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Create Attribute Sets
+for your asset models
+(optional but
+recommended)</p></td>
+<td><p>phyHUB → Assets →
+Attribute Sets</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Upload your
+application packages
+to the store</p></td>
+<td><p>Device terminal</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Have a Software
+Manager review and
+rate the apps</p></td>
+<td><p>phyHUB → Software</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Create a Deployment
+Group for the
+relevant device model</p></td>
+<td><p>phyHUB → Deployment
+Groups</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Add the approved apps
+to the deployment
+group</p></td>
+<td><p>phyHUB → Deployment
+Groups → Apps</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Activate your devices
+in phyHUB</p></td>
+<td><p>phyHUB → Devices →
+Activate Device</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Add the registered
+devices to the
+deployment group</p></td>
+<td><p>phyHUB → Deployment
+Groups → Devices</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Create Asset
+Instances for each
+piece of physical
+equipment</p></td>
+<td><p>phyHUB → Assets</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Commission each
+device to its asset
+slot</p></td>
+<td><p>phyHUB → Assets →
+[Asset] → Hierarchy</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Monitor device
+status, installation
+progress, and asset
+health</p></td>
+<td><p>phyHUB → Devices /
+Assets</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>You do not have to complete all of these steps in a single
+session.</strong> Many teams set up the asset hierarchy and deployment
+groups once, then add new devices and commission them as new
+equipment arrives on site.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Can I add an app to a deployment group before it has been reviewed?</dt><dd><p>It depends on the status. Apps rated <strong>Experimental</strong>, <strong>Edge</strong>, or
+<strong>Stable</strong> all appear in the deployment group app selector and can be
+assigned to devices. Apps with <strong>Unrated</strong> status (freshly uploaded, not yet
+reviewed) or <strong>Denied</strong> status (rejected by a reviewer) do not appear in the
+selector and cannot be deployed.</p>
+</dd>
+<dt>What happens if I add a device to a deployment group after the group already has apps assigned?</dt><dd><p>phyHUB will automatically begin installing all of the group’s apps on the
+newly added device. You do not need to trigger this manually.</p>
+</dd>
+<dt>Can a device belong to more than one deployment group?</dt><dd><p>No. A device can only be in one deployment group at a time. If you need a
+device to run a different set of apps, move it to a different group (or
+update the apps in its current group).</p>
+</dd>
+<dt>Can the same app be assigned to multiple deployment groups?</dt><dd><p>Yes. You can add the same app to as many deployment groups as you need.</p>
+</dd>
+<dt>What is the difference between “Deployment Status” and “Installation Status” on a device?</dt><dd><ul class="simple">
+<li><p><strong>Deployment Status</strong> is what phyHUB <em>wants</em> the device to have
+(based on its deployment group).</p></li>
+<li><p><strong>Installation Status</strong> is what is <em>actually installed</em> on the device
+right now. If the two don’t match, it means phyHUB is still in the process
+of pushing an update, or there was a failure during installation (check
+the Logs tab for details).</p></li>
+</ul>
+</dd>
+<dt>Do I have to commission a device to an asset?</dt><dd><p>No. Commissioning is optional. Devices in deployment groups will receive and
+run their apps regardless of whether they are linked to an asset.
+Commissioning is only needed if you want to track which physical equipment
+each device belongs to.</p>
+</dd>
+<dt>Can I reassign a device to a different asset slot later?</dt><dd><p>Yes. You can de-commission a device from its current slot and re-commission it
+to a different one. This is useful when devices are replaced or physically
+moved.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="provisioning.html" class="btn btn-neutral float-left" title="Device Provisioning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cli.html" class="btn btn-neutral float-right" title="phyHUB CLI Manual: Devices &amp; Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, PHYTEC Messtechnik GmbH.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    Languages
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+    <dl>
+      <dt>Languages</dt>
+        
+          <dd><a href="https://phytec.github.io/doc-phyhub/index.html">en</a></dd>
+        
+    </dl>
+    
+
+    <div style="margin: 10px 0;"></div>
+    <dl>
+      <dt>Version</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
