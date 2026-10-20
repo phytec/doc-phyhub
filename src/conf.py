@@ -31,7 +31,7 @@ version = re.sub('', '', os.popen('git describe --tags').read().strip())
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks',
-    'sphinx_rtd_theme',
+    'sphinx_phytec_theme',
     'sphinx_substitution_extensions',
     'sphinx_sitemap',
     'sphinxcontrib.rsvgconverter',
@@ -51,15 +51,10 @@ highlight_language = 'none'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-html_logo = 'sphinx/static/logo-phytec.svg'
-html_favicon = 'sphinx/static/favicon.ico'
+html_theme = 'sphinx_phytec_theme'
 html_title = 'PHYTEC phyHUB Documentation'
 html_show_sphinx = False
 html_baseurl = 'https://phytec.github.io/doc-phyhub/'
-
-# Add robots.txt so search engines can index the site
-html_extra_path = ['sphinx/static/robots.txt']
 
 # Link scheme
 sitemap_url_scheme = "{link}"
@@ -85,17 +80,3 @@ html_context = {
         ['en', pages_root],
     ]
 }
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['sphinx/static']
-
-# The templates directory is used to display a language selector in the sidebar.
-templates_path = ['sphinx/templates']
-
-html_css_files = [
-    'css/phytec-theme.css',
-]
-
-pygments_style = 'bw'
